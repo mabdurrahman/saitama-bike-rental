@@ -37,6 +37,10 @@ allprojects {
         supportLibraryVersion = '25.0.1'
         playServicesVersion = '10.0.1'
         
+        gsonVersion = '2.6.2'
+
+        retrofitVersion = '2.1.0'
+        okhttpVersion = '3.3.0'
         leakCanaryVersion = '1.5'
         
         junitVersion = '4.12'

@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.data;
+package com.mabdurrahman.crossover.exercise.core.ui.places.list;
 
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
-
-import java.util.List;
+import com.mabdurrahman.crossover.exercise.core.ui.base.BasePresenter;
 
 /**
- * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
+ * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public interface DataSource {
+public class PlacesListPresenter extends BasePresenter<PlacesListContract.View> implements PlacesListContract.ViewActions {
 
-    void authenticateUser(String email, String password, DataSourceCallback<String> authenticationCallback);
+    public PlacesListPresenter() {
+    }
 
-    void registerNewUser(String email, String password, DataSourceCallback<String> authenticationCallback);
+    @Override
+    public void onItemClicked(Place place) {
+        if (!isViewAttached()) return;
 
-    void getPlaces(DataSourceCallback<List<Place>> placesCallback);
-
-    void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, DataSourceCallback<String> rentCallback);
+        view.showPikeRentalConfirmation(place);
+    }
 }

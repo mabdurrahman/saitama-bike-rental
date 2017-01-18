@@ -13,22 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.data;
+package com.mabdurrahman.crossover.exercise.core.ui.rent;
 
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
+import com.mabdurrahman.crossover.exercise.core.ui.base.RemoteView;
 
 import java.util.List;
 
 /**
- * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
+ * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public interface DataSource {
+public interface RentContract {
 
-    void authenticateUser(String email, String password, DataSourceCallback<String> authenticationCallback);
+    interface ViewActions {
 
-    void registerNewUser(String email, String password, DataSourceCallback<String> authenticationCallback);
+        void onBikeRentalRequested(String creditCardNo, String holderName, String expirationDate, String securityCode);
 
-    void getPlaces(DataSourceCallback<List<Place>> placesCallback);
+    }
 
-    void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, DataSourceCallback<String> rentCallback);
+    interface View extends RemoteView {
+
+        void showBikeRentalSuccess();
+
+    }
 }

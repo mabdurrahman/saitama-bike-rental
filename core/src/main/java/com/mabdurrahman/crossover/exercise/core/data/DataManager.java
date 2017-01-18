@@ -15,6 +15,11 @@
  */
 package com.mabdurrahman.crossover.exercise.core.data;
 
+import com.mabdurrahman.crossover.exercise.core.data.network.RemoteDataSource;
+import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
+
+import java.util.List;
+
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
  */
@@ -32,11 +37,35 @@ public class DataManager {
     }
 
     public DataManager() {
-
+        // By default we rely upon RemoteDataSource
+        this.dataService = new RemoteDataSource();
     }
 
     public DataManager(DataSource dataService) {
         this.dataService = dataService;
     }
 
+    public void authenticateUser(String email, String password, final DataSourceCallback<String> authenticationCallback) {
+        if (dataService == null) return;
+
+        this.dataService.authenticateUser(email, password, authenticationCallback);
+    }
+
+    public void registerNewUser(String email, String password, final DataSourceCallback<String> authenticationCallback) {
+        if (dataService == null) return;
+
+        this.dataService.registerNewUser(email, password, authenticationCallback);
+    }
+
+    public void getPlaces(final DataSourceCallback<List<Place>> placesCallback) {
+        if (dataService == null) return;
+
+        this.dataService.getPlaces(placesCallback);
+    }
+
+    public void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, final DataSourceCallback<String> rentCallback) {
+        if (dataService == null) return;
+
+        this.dataService.rentBike(creditCardNo, holderName, expirationDate, securityCode, rentCallback);
+    }
 }

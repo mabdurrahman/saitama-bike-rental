@@ -55,6 +55,17 @@ dependencies {
     // Support Library
     compile "com.android.support:support-annotations:$supportLibraryVersion"
 
+    // Gson
+    compile "com.google.code.gson:gson:$gsonVersion"
+
+    // Retrofit2
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // OkHttp3
+    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    
     // LeakCanary
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"

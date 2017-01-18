@@ -24,6 +24,7 @@ import com.mabdurrahman.crossover.exercise.core.ui.intro.IntroContract;
 import com.mabdurrahman.crossover.exercise.core.ui.intro.IntroPresenter;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
 import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
+import com.mabdurrahman.crossover.exercise.ui.places.PlacesActivity;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
@@ -76,7 +77,7 @@ public class IntroActivity extends BaseActivity implements IntroContract.View {
 
     @Override
     public void showPlacesList() {
-        // Start Places Activity
+        startActivity(new Intent(this, PlacesActivity.class));
         finish();
     }
 

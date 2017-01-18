@@ -28,5 +28,9 @@
         <!-- Unreveal Icon -->
         <attr name="met_unrevealIcon" format="integer" />
     </declare-styleable>
+    
+    <declare-styleable name="StatusBarSpacer">
+        <attr name="statusBackground" format="reference|color" />
+    </declare-styleable>
 
 </resources>

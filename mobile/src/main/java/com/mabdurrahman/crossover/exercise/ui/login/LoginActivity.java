@@ -15,6 +15,7 @@
  */
 package com.mabdurrahman.crossover.exercise.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import com.mabdurrahman.crossover.exercise.core.ui.login.LoginContract;
 import com.mabdurrahman.crossover.exercise.core.ui.login.LoginPresenter;
 import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
+import com.mabdurrahman.crossover.exercise.ui.places.PlacesActivity;
 import com.mabdurrahman.crossover.exercise.util.InputUtils;
 import com.mabdurrahman.crossover.exercise.util.ProgressUtils;
 import com.mabdurrahman.crossover.exercise.util.ValidationUtils;
@@ -118,7 +120,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void showPlacesList() {
-        // Start Places Activity
+        startActivity(new Intent(this, PlacesActivity.class));
         finish();
     }
 

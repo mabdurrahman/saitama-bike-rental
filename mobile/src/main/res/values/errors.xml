@@ -16,6 +16,10 @@
   -->
 <resources>
 
+    <!-- General Errors -->
+    <string name="error_no_items_to_display">No items to display</string>
+    <string name="error_generic_server_error">There was na error contacting the server, %1$s</string>
+
     <!-- Validation Errors -->
     <string name="error_required">This field is required</string>
     <string name="error_email_not_valid">Please enter a valid email</string>

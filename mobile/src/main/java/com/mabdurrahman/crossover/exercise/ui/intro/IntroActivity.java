@@ -15,6 +15,7 @@
  */
 package com.mabdurrahman.crossover.exercise.ui.intro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -22,6 +23,7 @@ import com.mabdurrahman.crossover.exercise.R;
 import com.mabdurrahman.crossover.exercise.core.ui.intro.IntroContract;
 import com.mabdurrahman.crossover.exercise.core.ui.intro.IntroPresenter;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
+import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
@@ -68,7 +70,7 @@ public class IntroActivity extends BaseActivity implements IntroContract.View {
 
     @Override
     public void showLoginForm() {
-        // Start Login Activity
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 

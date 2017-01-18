@@ -27,7 +27,21 @@ import com.mabdurrahman.crossover.exercise.core.CoreApplication;
  */
 public class ClientUtils {
 
+    private static String latestLoggedEmail;
     private static String authToken;
+
+    public static String getLatestLoggedEmail() {
+        if (latestLoggedEmail == null) {
+            latestLoggedEmail = PreferenceManager.getDefaultSharedPreferences(CoreApplication.getInstance()).getString(Constants.PREF_LATEST_LOGGED_EMAIL, null);
+        }
+        return latestLoggedEmail;
+    }
+
+    public static void setLatestLoggedEmail(final String email) {
+        latestLoggedEmail = email;
+
+        PreferenceManager.getDefaultSharedPreferences(CoreApplication.getInstance()).edit().putString(Constants.PREF_LATEST_LOGGED_EMAIL, email).apply();
+    }
 
     public static String getAuthToken() {
         if (authToken == null) {

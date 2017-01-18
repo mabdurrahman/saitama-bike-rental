@@ -35,6 +35,7 @@ public class Constants {
     public static final String HEADER_AUTHORIZATION = "Authorization";
 
     // Preferences
+    public static final String PREF_LATEST_LOGGED_EMAIL = "PREF_LATEST_LOGGED_EMAIL";
     public static final String PREF_AUTH_TOKEN = "PREF_AUTH_TOKEN";
 
 }

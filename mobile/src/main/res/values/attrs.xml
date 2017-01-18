@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (c) Mahmoud Abdurrahman 2017. All Rights Reserved.
   ~ <p/>
@@ -13,20 +14,19 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <resources>
-    <!-- App Name -->
-    <string name="app_name">Bike Rental</string>
 
-    <!-- EditText Hints -->
-    <string name="edit_password">Password</string>
-    <string name="edit_login_email">Email</string>
+    <declare-styleable name="MaterialPasswordEditText">
+        <!-- Reveal button -->
+        <attr name="revealButton" format="boolean" />
+        <!-- Reveal sticky mode -->
+        <attr name="revealStickyMode" format="boolean" />
+        <!-- Padding between icon(s) and the main area. 8dp by default. -->
+        <attr name="met_iconPadding" />
+        <!-- Reveal Icon -->
+        <attr name="met_revealIcon" format="integer" />
+        <!-- Unreveal Icon -->
+        <attr name="met_unrevealIcon" format="integer" />
+    </declare-styleable>
 
-    <!-- Buttons -->
-    <string name="btn_login">Login</string>
-
-    <!-- Progress Messages -->
-    <string name="_please_wait">Please wait&#8230;</string>
-    <string name="_logging_in">Logging in&#8230;</string>
-    <string name="_logging_out">Logging out&#8230;</string>
 </resources>

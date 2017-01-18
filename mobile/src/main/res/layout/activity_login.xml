@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/container_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/launch_screen" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edit_email"
+            style="@style/AppTheme.EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_spacing_xlong"
+            android:hint="@string/edit_login_email"
+            android:maxLines="1"
+            android:inputType="textEmailAddress" />
+
+        <com.mabdurrahman.crossover.exercise.view.MaterialPasswordEditText
+            android:id="@+id/edit_password"
+            style="@style/AppTheme.EditTextStyle.Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_password"
+            android:imeOptions="actionGo"
+            android:layout_marginTop="@dimen/view_spacing_medium" />
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/AppTheme.ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_spacing_double"
+            android:text="@string/btn_login"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+
+</ScrollView>

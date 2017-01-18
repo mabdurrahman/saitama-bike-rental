@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (c) Mahmoud Abdurrahman 2017. All Rights Reserved.
   ~ <p/>
@@ -13,20 +14,14 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <resources>
-    <!-- App Name -->
-    <string name="app_name">Bike Rental</string>
 
-    <!-- EditText Hints -->
-    <string name="edit_password">Password</string>
-    <string name="edit_login_email">Email</string>
+    <!-- Validation Errors -->
+    <string name="error_required">This field is required</string>
+    <string name="error_email_not_valid">Please enter a valid email</string>
+    <string name="error_string_length">This field must be at least %d characters long</string>
+    <string name="error_password_length">Your password must be at least 8 characters long</string>
+    <string name="error_password_capital_letters">Your password must include at least one capital letter</string>
+    <string name="error_password_numbers">Your password must include at least one number</string>
 
-    <!-- Buttons -->
-    <string name="btn_login">Login</string>
-
-    <!-- Progress Messages -->
-    <string name="_please_wait">Please wait&#8230;</string>
-    <string name="_logging_in">Logging in&#8230;</string>
-    <string name="_logging_out">Logging out&#8230;</string>
 </resources>

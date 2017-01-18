@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.ui.login;
+package com.mabdurrahman.crossover.exercise.core.ui.register;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -27,23 +27,23 @@ import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.ViewActions {
+public class RegisterPresenter extends BasePresenter<RegisterContract.View> implements RegisterContract.ViewActions {
 
     @NonNull
     private DataManager dataManager;
 
-    public LoginPresenter(@NonNull DataManager dataManager) {
+    public RegisterPresenter(@NonNull DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
     @Override
-    public void onLoginRequested(String username, String password) {
+    public void onRegisterRequested(String username, String password) {
         if (!isViewAttached()) return;
 
         view.showMessageLayout(false);
         view.showProgress();
 
-        dataManager.authenticateUser(username, password, new DataSourceCallback<String>() {
+        dataManager.registerNewUser(username, password, new DataSourceCallback<String>() {
             @Override
             public void onSuccess(String authToken) {
                 if (!isViewAttached()) return;
@@ -77,9 +77,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     }
 
     @Override
-    public void onRegistrationRequested() {
+    public void onLoginRequested() {
         if (!isViewAttached()) return;
 
-        view.showRegistrationForm();
+        view.showLoginForm();
     }
 }

@@ -20,8 +20,8 @@ import android.text.TextUtils;
 import com.mabdurrahman.crossover.exercise.core.data.DataManager;
 import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
 import com.mabdurrahman.crossover.exercise.core.mock.MockDataSource;
-import com.mabdurrahman.crossover.exercise.core.ui.login.LoginContract;
-import com.mabdurrahman.crossover.exercise.core.ui.login.LoginPresenter;
+import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterContract;
+import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterPresenter;
 import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.core.util.TestConstants;
 
@@ -40,7 +40,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
-
 import static org.powermock.api.mockito.PowerMockito.doNothing;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.spy;
@@ -51,27 +50,27 @@ import static org.powermock.api.mockito.PowerMockito.when;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ TextUtils.class, ClientUtils.class })
-public class LoginPresenterTest {
+public class RegisterPresenterTest {
 
     @Mock
     private DataManager dataManager = spy(new DataManager(new MockDataSource()));
 
     @Mock
-    private LoginContract.View view;
+    private RegisterContract.View view;
 
     @Captor
     private ArgumentCaptor<DataSourceCallback<String>> authenticationCallbackCaptor;
 
-    private LoginPresenter presenter;
+    private RegisterPresenter presenter;
 
     @Before
     public void setUp() {
-        presenter = new LoginPresenter(dataManager);
+        presenter = new RegisterPresenter(dataManager);
         presenter.attachView(view);
     }
 
     @Test
-    public void loginRequested_Success() throws Exception {
+    public void registerRequested_Success() throws Exception {
         mockStatic(TextUtils.class, ClientUtils.class);
 
         when(TextUtils.isEmpty(any(CharSequence.class))).thenReturn(false);
@@ -79,43 +78,43 @@ public class LoginPresenterTest {
 
         ClientUtils.setAuthToken(TestConstants.FAKE_AUTH_TOKEN);
 
-        presenter.onLoginRequested(TestConstants.VALID_USERNAME, TestConstants.VALID_PASSWORD);
+        presenter.onRegisterRequested(TestConstants.VALID_USERNAME, TestConstants.VALID_PASSWORD);
 
         InOrder inOrder = inOrder(view);
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).authenticateUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
+        verify(dataManager).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showPlacesList();
     }
 
     @Test
-    public void loginRequested_Unauthorized() {
+    public void registerRequested_Unauthorized() {
 
-        presenter.onLoginRequested(TestConstants.VALID_USERNAME, TestConstants.INVALID_PASSWORD);
+        presenter.onRegisterRequested(TestConstants.VALID_USERNAME, TestConstants.INVALID_PASSWORD);
 
         InOrder inOrder = inOrder(view);
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).authenticateUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
+        verify(dataManager).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showUnauthorizedError();
     }
 
     @Test
-    public void loginRequested_Failed() {
+    public void registerRequested_Failed() {
 
-        presenter.onLoginRequested(TestConstants.INVALID_USERNAME, TestConstants.INVALID_PASSWORD);
+        presenter.onRegisterRequested(TestConstants.INVALID_USERNAME, TestConstants.INVALID_PASSWORD);
 
         InOrder inOrder = inOrder(view);
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).authenticateUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
+        verify(dataManager).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showError(TestConstants.ERROR_INVALID_CREDENTIALS.getMessage());
@@ -123,9 +122,9 @@ public class LoginPresenterTest {
 
     @Test
     public void registerationRequested_Success() {
-        presenter.onRegistrationRequested();
+        presenter.onLoginRequested();
 
-        verify(view).showRegistrationForm();
+        verify(view).showLoginForm();
     }
 
     @After

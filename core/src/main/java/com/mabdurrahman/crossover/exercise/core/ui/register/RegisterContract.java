@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.ui.login;
+package com.mabdurrahman.crossover.exercise.core.ui.register;
 
 import com.mabdurrahman.crossover.exercise.core.ui.base.RemoteView;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public interface LoginContract {
+public interface RegisterContract {
 
     interface ViewActions {
 
-        void onLoginRequested(String username, String password);
+        void onRegisterRequested(String username, String password);
 
-        void onRegistrationRequested();
+        void onLoginRequested();
 
     }
 
     interface View extends RemoteView {
 
-        void showRegistrationForm();
+        void showLoginForm();
 
         void showPlacesList();
 

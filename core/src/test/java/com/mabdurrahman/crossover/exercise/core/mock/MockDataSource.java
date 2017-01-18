@@ -41,7 +41,13 @@ public class MockDataSource implements DataSource {
 
     @Override
     public void registerNewUser(String email, String password, DataSourceCallback<String> authenticationCallback) {
-
+        if (email.equals(TestConstants.VALID_USERNAME) && password.equals(TestConstants.VALID_PASSWORD)) {
+            authenticationCallback.onSuccess(TestConstants.FAKE_AUTH_TOKEN);
+        } else if (!email.equals(TestConstants.VALID_USERNAME)) {
+            authenticationCallback.onFailed(TestConstants.ERROR_INVALID_CREDENTIALS);
+        } else {
+            authenticationCallback.onUnauthorized();
+        }
     }
 
     @Override

@@ -37,23 +37,23 @@
             android:layout_marginTop="@dimen/view_spacing_medium" />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             style="@style/AppTheme.ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/view_spacing_double"
-            android:text="@string/btn_login"
+            android:text="@string/btn_register"
             android:textAllCaps="true" />
 
         <TextView
-            android:id="@+id/label_register"
+            android:id="@+id/label_login"
             style="@style/AppTheme.ButtonStyle.Link"
             android:textAlignment="center"
             android:layout_marginTop="@dimen/view_spacing_long"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/view_spacing_medium"
-            android:text="@string/label_register"/>
+            android:text="@string/label_login"/>
 
     </LinearLayout>
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.ui.login;
+package com.mabdurrahman.crossover.exercise.ui.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,12 +24,12 @@ import android.widget.Button;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mabdurrahman.crossover.exercise.R;
 import com.mabdurrahman.crossover.exercise.core.data.DataManager;
-import com.mabdurrahman.crossover.exercise.core.ui.login.LoginContract;
-import com.mabdurrahman.crossover.exercise.core.ui.login.LoginPresenter;
+import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterContract;
+import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterPresenter;
 import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
+import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
 import com.mabdurrahman.crossover.exercise.ui.places.PlacesActivity;
-import com.mabdurrahman.crossover.exercise.ui.register.RegisterActivity;
 import com.mabdurrahman.crossover.exercise.util.InputUtils;
 import com.mabdurrahman.crossover.exercise.util.ProgressUtils;
 import com.mabdurrahman.crossover.exercise.util.ValidationUtils;
@@ -43,7 +43,7 @@ import butterknife.OnEditorAction;
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public class LoginActivity extends BaseActivity implements LoginContract.View {
+public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
     @Bind(R.id.edit_email)
     protected MaterialEditText emailEdit;
@@ -51,10 +51,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Bind(R.id.edit_password)
     protected MaterialPasswordEditText passwordEdit;
 
-    @Bind(R.id.btn_login)
-    protected Button loginBtn;
+    @Bind(R.id.btn_register)
+    protected Button registerBtn;
 
-    private LoginPresenter presenter;
+    private RegisterPresenter presenter;
 
     private MaterialDialog progressDialog = null;
 
@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new LoginPresenter(DataManager.getInstance());
+        presenter = new RegisterPresenter(DataManager.getInstance());
         presenter.attachView(this);
 
         setupViews();
@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected int getContentResource() {
-        return R.layout.activity_login;
+        return R.layout.activity_register;
     }
 
     @Override
@@ -93,25 +93,25 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @OnEditorAction(R.id.edit_password)
     protected boolean onLoginEditorAction() {
-        onLoginClicked();
+        onRegisterClicked();
         return true;
     }
 
-    @OnClick(R.id.btn_login)
-    protected void onLoginClicked() {
+    @OnClick(R.id.btn_register)
+    protected void onRegisterClicked() {
         if (validateInput()) {
             String username = emailEdit.getText().toString();
             String password = passwordEdit.getText().toString();
 
             InputUtils.hideKeyboard(this);
 
-            presenter.onLoginRequested(username, password);
+            presenter.onRegisterRequested(username, password);
         }
     }
 
-    @OnClick(R.id.label_register)
-    protected void onRegisterClicked() {
-        presenter.onRegistrationRequested();
+    @OnClick(R.id.label_login)
+    protected void onLoginClicked() {
+        presenter.onLoginRequested();
     }
 
     private boolean validateInput() {
@@ -126,8 +126,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void showRegistrationForm() {
-        Intent intent = IntentCompat.makeRestartActivityTask(new Intent(this, RegisterActivity.class).getComponent());
+    public void showLoginForm() {
+        Intent intent = IntentCompat.makeRestartActivityTask(new Intent(this, LoginActivity.class).getComponent());
         startActivity(intent);
     }
 
@@ -139,7 +139,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void showProgress() {
-        progressDialog = ProgressUtils.show(this, getString(R.string._logging_in), getString(R.string._please_wait));
+        progressDialog = ProgressUtils.show(this, getString(R.string._registering), getString(R.string._please_wait));
     }
 
     @Override

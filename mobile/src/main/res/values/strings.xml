@@ -27,14 +27,18 @@
 
     <!-- Labels -->
     <string name="label_get_directions">Get Directions</string>
+    <string name="label_login">Already have login?</string>
+    <string name="label_register">Don\'t have login?</string>
 
     <!-- Buttons -->
     <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
     <string name="btn_try_again">Try Again</string>
     <string name="btn_check_again">Check Again</string>
 
     <!-- Progress Messages -->
     <string name="_please_wait">Please wait&#8230;</string>
     <string name="_logging_in">Logging in&#8230;</string>
+    <string name="_registering">Signing up&#8230;</string>
     <string name="_logging_out">Logging out&#8230;</string>
 </resources>

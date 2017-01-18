@@ -53,6 +53,11 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
+            android:name=".ui.register.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
             android:name=".ui.places.PlacesActivity"
             android:label="@string/activity_places"
             android:screenOrientation="portrait" />

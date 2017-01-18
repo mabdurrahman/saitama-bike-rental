@@ -24,6 +24,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
+        <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowStyle</item>
+
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/window_background</item>
+
         <!-- AppCompat Material Attrs -->
         <!--   branding color for the app bar -->
         <item name="colorPrimary">@color/app_color</item>
@@ -33,6 +38,199 @@
         <item name="colorAccent">@color/app_color_accent</item>
         <!--   theme UI controls like checkboxes -->
         <item name="colorControlNormal">@color/app_color_accent</item>
+
+        <item name="windowActionModeOverlay">true</item>
+
+        <!-- All dialogs will default to Theme.LIGHT with this set to true. -->
+        <item name="md_dark_theme">false</item>
+
+        <item name="md_positive_color">@color/app_color_accent</item>
+        <item name="md_neutral_color">@color/BLACK</item>
+        <item name="md_negative_color">@color/SIMI_DARK_GRAY</item>
+
+        <!-- Toolbar styles -->
+        <item name="actionMenuTextAppearance">@style/AppTheme.ActionBar.MenuTextAppearance</item>
+        <item name="textAppearanceListItem">@style/AppTextAppearance.Medium</item>
+        <item name="textAppearanceLargePopupMenu">@style/AppTextAppearance.Medium</item>
+        <item name="textAppearanceSmallPopupMenu">@style/AppTextAppearance.Small</item>
+        <item name="textAppearanceSearchResultTitle">@style/AppTextAppearance.Medium</item>
+        <item name="textAppearanceSearchResultSubtitle">@style/AppTextAppearance.Small</item>
+
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="android:textColorTertiary">@color/tertiary_text</item>
+        <item name="android:textColorPrimaryInverse">@color/primary_text_inverse</item>
+        <item name="android:textColorSecondaryInverse">@color/secondary_text_inverse</item>
+        <item name="android:textColorTertiaryInverse">@color/tertiary_text_inverse</item>
+
+        <item name="android:textAppearanceSmall">@style/AppTextAppearance.Small</item>
+        <item name="android:textAppearanceMedium">@style/AppTextAppearance.Medium</item>
+        <item name="android:textAppearanceLarge">@style/AppTextAppearance.Large</item>
+
+        <item name="android:buttonStyle">@style/AppTheme.ButtonStyle</item>
+        <item name="android:imageButtonStyle">@style/AppTheme.ButtonStyle.Transparent</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextViewStyle</item>
+        <item name="android:editTextStyle">@style/AppTheme.EditTextStyle</item>
+        <item name="android:spinnerStyle">@style/AppTheme.EditTextStyle</item>
+    </style>
+
+    <style name="AppTheme.BrandedLaunch" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorPrimary">@color/app_color</item>
+        <item name="colorPrimaryDark">@color/app_color_dark</item>
+        <item name="colorAccent">@color/app_color_accent</item>
+
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="android:textColorTertiary">@color/tertiary_text</item>
+        <item name="android:textColorPrimaryInverse">@color/primary_text_inverse</item>
+        <item name="android:textColorSecondaryInverse">@color/secondary_text_inverse</item>
+        <item name="android:textColorTertiaryInverse">@color/tertiary_text_inverse</item>
+
+        <item name="android:textAppearanceSmall">@style/AppTextAppearance.Small</item>
+        <item name="android:textAppearanceMedium">@style/AppTextAppearance.Medium</item>
+        <item name="android:textAppearanceLarge">@style/AppTextAppearance.Large</item>
+
+        <item name="android:buttonStyle">@style/AppTheme.ButtonStyle</item>
+        <item name="android:imageButtonStyle">@style/AppTheme.ButtonStyle.Transparent</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextViewStyle</item>
+        <item name="android:editTextStyle">@style/AppTheme.EditTextStyle</item>
+        <item name="android:spinnerStyle">@style/AppTheme.EditTextStyle</item>
+    </style>
+
+    <style name="AppTextAppearance.VeryExtraSmall" parent="android:TextAppearance.Small">
+        <item name="android:textSize">6sp</item>
+    </style>
+
+    <style name="AppTextAppearance.SuperExtraSmall" parent="android:TextAppearance.Small">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="AppTextAppearance.SuperSmall" parent="android:TextAppearance.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="AppTextAppearance.ExtraSmall" parent="android:TextAppearance.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AppTextAppearance.Small" parent="android:TextAppearance.Small">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTextAppearance.Medium" parent="android:TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppTextAppearance.Large" parent="android:TextAppearance.Large">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="AppTextAppearance.SimiLarge" parent="android:TextAppearance.Large">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="AppTextAppearance.ExtraLarge" parent="android:TextAppearance.Large">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="AppTheme.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">false</item>
+        <item name="color">@color/DARK_GRAY</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.TitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.SubtitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.MenuTextAppearance" parent="">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppTheme.ToolBarStyle" parent="">
+        <item name="theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+
+        <item name="titleTextAppearance">@style/AppTheme.ActionBar.TitleTextAppearance</item>
+        <item name="subtitleTextAppearance">@style/AppTheme.ActionBar.SubtitleTextAppearance</item>
+    </style>
+
+    <style name="AppTheme.ButtonStyle" parent="android:Widget.Button">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:background">@drawable/btn_default</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/txt_button</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="AppTheme.ButtonStyle.Small" parent="AppTheme.ButtonStyle">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="AppTheme.ButtonStyle.Outline" parent="AppTheme.ButtonStyle">
+        <item name="android:background">@drawable/btn_outline</item>
+        <item name="android:textColor">@color/txt_button_inverse</item>
+    </style>
+
+    <style name="AppTheme.ButtonStyle.Outline.Small" parent="AppTheme.ButtonStyle.Outline">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="AppTheme.ButtonStyle.Transparent" parent="AppTheme.ButtonStyle">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.TextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.TextViewStyle.Inverse" parent="AppTheme.TextViewStyle">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+    </style>
+
+    <style name="AppTheme.EditTextStyle" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/edittext_default</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+        <item name="android:textColorHint">@color/DARK_GRAY_40</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="met_floatingLabel">normal</item>
+        <item name="met_baseColor">@color/edittext_default_normal</item>
+        <item name="met_underlineColor">@color/edittext_default_normal</item>
+        <item name="met_primaryColor">@color/edittext_default_selected</item>
+        <item name="met_errorColor">@color/DARK_RED</item>
+    </style>
+
+    <style name="AppTheme.EditTextStyle.Password" parent="AppTheme.EditTextStyle">
+        <item name="android:inputType">textPassword</item>
+        <item name="met_iconPadding">@dimen/view_spacing_medium</item>
+    </style>
+
+
+    <style name="AppTheme.SpinnerStyle" parent="Widget.AppCompat.Spinner.DropDown">
+        <item name="android:layout_height">38dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="AppTheme.RadioButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/view_spacing_medium</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="AppTheme.CheckBox.Small" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+
     </style>
 
 </resources>

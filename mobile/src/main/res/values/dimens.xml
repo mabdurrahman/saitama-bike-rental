@@ -15,9 +15,35 @@
   -->
 
 <resources>
+    <dimen name="toolbar_elevation">4dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Default margin/padding spacing Views -->
+    <dimen name="view_spacing_narrow">4dp</dimen>
+    <dimen name="view_spacing_medium">8dp</dimen>
+    <dimen name="view_spacing_amongst">12dp</dimen>
+    <dimen name="view_spacing_double">16dp</dimen>
+    <dimen name="view_spacing_sdouble">24dp</dimen>
+    <dimen name="view_spacing_long">32dp</dimen>
+    <dimen name="view_spacing_slong">48dp</dimen>
+    <dimen name="view_spacing_xlong">64dp</dimen>
+
+    <!-- Default corner radius for Views -->
+    <dimen name="view_corner">2dp</dimen>
+
+    <!-- Default inner padding within Buttons -->
+    <dimen name="button_vertical_padding">@dimen/view_spacing_narrow</dimen>
+    <dimen name="button_horizontal_padding">@dimen/view_spacing_medium</dimen>
+
+    <!-- Default inner padding within EditTexts -->
+    <dimen name="edittext_vertical_padding">@dimen/view_spacing_narrow</dimen>
+    <dimen name="edittext_horizontal_padding">@dimen/view_spacing_medium</dimen>
+
+    <!-- Default inner padding within EditTexts -->
+    <dimen name="spinner_vertical_padding">@dimen/view_spacing_narrow</dimen>
+    <dimen name="spinner_horizontal_padding">@dimen/view_spacing_medium</dimen>
 
 </resources>

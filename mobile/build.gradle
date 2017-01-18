@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'let'
 
 android {
     compileSdkVersion project.compileSdkVersion
@@ -67,6 +68,23 @@ dependencies {
     // Google Play Services
     compile "com.google.android.gms:play-services-maps:$playServicesVersion"
     compile "com.google.android.gms:play-services-location:$playServicesVersion"
+    
+    // Butter Knife
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    
+    // Icepick
+    compile "frankiesardo:icepick:$icepickVersion"
+    provided "frankiesardo:icepick-processor:$icepickVersion"
+    
+    // Material Helpers
+    compile("com.github.afollestad.material-dialogs:core:$materialDialogsVersion@aar") {
+        transitive = true
+    }
+    compile("com.github.afollestad.material-dialogs:commons:$materialDialogsVersion@aar") {
+        transitive = true
+    }
+    compile "com.pnikosis:materialish-progress:$materialishProgressVersion"
+    compile "com.rengwuxian.materialedittext:library:$materialEditTextVersion"
     
     // Instrumentation tests dependencies
     androidTestCompile("com.android.support.test:runner:$testRunnerVersion") {

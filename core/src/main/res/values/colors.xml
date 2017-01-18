@@ -16,9 +16,57 @@
   -->
 <resources>
     <!-- App start -->
-    <color name="app_color">#F6F6F6</color>
-    <color name="app_color_dark">#40404040</color>
-    <color name="app_color_accent">#5AC8B4</color>
+    <color name="app_color">@color/MAIN_WHITE</color>
+    <color name="app_color_dark">@color/DARK_GRAY_25</color>
+    <color name="app_color_accent">@color/MAIN_AQUAMARINE</color>
     <!-- App end -->
+
+    <!-- Static start -->
+    <color name="BLACK">#000000</color>
+    <color name="WHITE">#FFFFFFFF</color>
+    <color name="TRANS">#00000000</color>
+    <color name="LIGHT_GRAY">#E0E0E0</color>
+    <color name="SIMI_LIGHT_GRAY">#BCBCBC</color>
+    <color name="GRAY">#8A8A8A</color>
+    <color name="SIMI_DARK_GRAY">#7D7D7D</color>
+    <color name="DARK_GRAY">#404040</color>
+    <color name="DARKER_GRAY">#272727</color>
+    <color name="ORANGE">#FF8500</color>
+    <color name="LEMON">#E3AB01</color>
+    <color name="RED">#FF0000</color>
+    <color name="LIGHT_RED">#F96E62</color>
+    <color name="DARK_RED">#be1616</color>
+    <color name="DEEP_PINK">#D0295A</color>
+    <color name="PURPLE">#793396</color>
+    <color name="LIGHT_PURPLE">#AB3FC8</color>
+    <color name="DARK_PURPLE">#4D3269</color>
+    <color name="CYAN">#37fff3</color>
+    <color name="AQUAMARINE">#5AC8B4</color>
+    <color name="DARK_AQUAMARINE">#1eb886</color>
+    <color name="GREEN">#8bb254</color>
+
+    <color name="MAIN_WHITE">#F6F6F6</color>
+    <color name="MAIN_AQUAMARINE">#5AC8B4</color>
+
+    <color name="GRAY_50">#808A8A8A</color>
+    <color name="GRAY_40">#668A8A8A</color>
+    <color name="GRAY_25">#408A8A8A</color>
+
+    <color name="DARK_GRAY_70">#B2404040</color>
+    <color name="DARK_GRAY_50">#80404040</color>
+    <color name="DARK_GRAY_40">#66404040</color>
+    <color name="DARK_GRAY_25">#40404040</color>
+    <color name="DARK_GRAY_20">#33404040</color>
+
+    <color name="WHITE_70">#B2FFFFFF</color>
+    <color name="WHITE_50">#80FFFFFF</color>
+    <color name="WHITE_40">#66FFFFFF</color>
+    <color name="WHITE_25">#40FFFFFF</color>
+    <color name="WHITE_20">#33FFFFFF</color>
+
+    <color name="AQUAMARINE_50">#805AC8B4</color>
+    <color name="AQUAMARINE_40">#665AC8B4</color>
+    <color name="AQUAMARINE_25">#405AC8B4</color>
+    <!-- Static end -->
 
 </resources>

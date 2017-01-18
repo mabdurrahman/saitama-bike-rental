@@ -30,6 +30,43 @@
 
         <item name="android:statusBarColor">@android:color/transparent</item>
 
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+
+        <item name="android:dialogTheme">@style/AppTheme.Dialog</item>
+        <item name="android:alertDialogStyle">@style/AppTheme.Dialog</item>
+
+        <item name="android:windowActionModeOverlay">true</item>
+
+        <item name="android:actionMenuTextAppearance">@style/AppTheme.ActionBar.MenuTextAppearance</item>
+        <item name="android:textAppearanceListItem">@style/AppTextAppearance.Medium</item>
+        <item name="android:textAppearanceListItemSecondary">@style/AppTextAppearance.Small</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/AppTextAppearance.Medium</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/AppTextAppearance.Small</item>
+    </style>
+
+    <style name="AppTheme.ToolBarStyle" parent="">
+        <item name="android:elevation">@dimen/toolbar_elevation</item>
+        <item name="android:transitionName">actionBar</item>
+
+        <item name="theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+
+        <item name="android:titleTextAppearance">@style/AppTheme.ActionBar.TitleTextAppearance</item>
+        <item name="android:subtitleTextAppearance">@style/AppTheme.ActionBar.SubtitleTextAppearance</item>
+
+        <item name="titleTextAppearance">@style/AppTheme.ActionBar.TitleTextAppearance</item>
+        <item name="subtitleTextAppearance">@style/AppTheme.ActionBar.SubtitleTextAppearance</item>
+    </style>
+
+    <style name="AppTheme.RadioButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/view_spacing_medium</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
     
 </resources>

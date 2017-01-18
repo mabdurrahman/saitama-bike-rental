@@ -41,4 +41,8 @@ public class CoreApplication extends Application {
 
         refWatcher = LeakCanary.install(this);
     }
+    
+    public RefWatcher getRefWatcher() {
+        return refWatcher;
+    }
 }

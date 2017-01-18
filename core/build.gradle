@@ -54,6 +54,11 @@ dependencies {
     
     // Support Library
     compile "com.android.support:support-annotations:$supportLibraryVersion"
+
+    // LeakCanary
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     
     // Unit tests dependencies
     testCompile "junit:junit:$junitVersion"

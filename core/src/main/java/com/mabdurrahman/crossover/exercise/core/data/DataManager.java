@@ -13,32 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.mabdurrahman.crossover.exercise.core.data;
 
-package com.mabdurrahman.crossover.exercise.core;
+/**
+ * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
+ */
+public class DataManager {
 
-import android.app.Application;
+    private static DataManager instance;
 
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+    private DataSource dataService;
 
-public class CoreApplication extends Application {
-
-    protected RefWatcher refWatcher;
-
-    private static CoreApplication instance;
-
-    public CoreApplication() {
-        instance = this;
-    }
-
-    public static CoreApplication getInstance() {
+    public static DataManager getInstance() {
+        if (instance == null) {
+            instance = new DataManager();
+        }
         return instance;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    public DataManager() {
 
-        refWatcher = LeakCanary.install(this);
     }
+
+    public DataManager(DataSource dataService) {
+        this.dataService = dataService;
+    }
+
 }

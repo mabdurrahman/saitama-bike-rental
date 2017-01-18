@@ -13,32 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.mabdurrahman.crossover.exercise.core.data;
 
-package com.mabdurrahman.crossover.exercise.core;
+import android.support.annotation.NonNull;
 
-import android.app.Application;
+/**
+ * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
+ */
+public interface DataSourceCallback<T> {
 
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+    void onSuccess(T t);
 
-public class CoreApplication extends Application {
+    void onUnauthorized();
 
-    protected RefWatcher refWatcher;
-
-    private static CoreApplication instance;
-
-    public CoreApplication() {
-        instance = this;
-    }
-
-    public static CoreApplication getInstance() {
-        return instance;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        refWatcher = LeakCanary.install(this);
-    }
+    void onFailed(@NonNull DataSourceError error);
 }

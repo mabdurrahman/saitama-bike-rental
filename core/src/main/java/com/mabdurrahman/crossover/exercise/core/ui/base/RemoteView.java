@@ -13,32 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.mabdurrahman.crossover.exercise.core.ui.base;
 
-package com.mabdurrahman.crossover.exercise.core;
+/**
+ * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/17/17.
+ */
+public interface RemoteView {
 
-import android.app.Application;
+    void showProgress();
 
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+    void hideProgress();
 
-public class CoreApplication extends Application {
+    void showUnauthorizedError();
 
-    protected RefWatcher refWatcher;
+    void showEmpty();
 
-    private static CoreApplication instance;
+    void showError(String errorMessage);
 
-    public CoreApplication() {
-        instance = this;
-    }
-
-    public static CoreApplication getInstance() {
-        return instance;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        refWatcher = LeakCanary.install(this);
-    }
+    void showMessageLayout(boolean show);
 }

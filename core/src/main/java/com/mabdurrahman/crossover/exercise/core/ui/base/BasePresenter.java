@@ -13,32 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
+package com.mabdurrahman.crossover.exercise.core.ui.base;
 
-package com.mabdurrahman.crossover.exercise.core;
+import android.support.annotation.NonNull;
 
-import android.app.Application;
+public abstract class BasePresenter<V> {
 
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+    protected V view;
 
-public class CoreApplication extends Application {
-
-    protected RefWatcher refWatcher;
-
-    private static CoreApplication instance;
-
-    public CoreApplication() {
-        instance = this;
+    public final void attachView(@NonNull V view) {
+        this.view = view;
     }
 
-    public static CoreApplication getInstance() {
-        return instance;
+    public final void detachView() {
+        this.view = null;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        refWatcher = LeakCanary.install(this);
+    /**
+     * Check if the view is attached.
+     * This checking is only necessary when returning from an asynchronous call
+     */
+    protected final boolean isViewAttached() {
+        return this.view != null;
     }
 }

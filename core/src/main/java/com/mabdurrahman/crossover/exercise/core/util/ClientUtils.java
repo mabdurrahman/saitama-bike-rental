@@ -86,9 +86,9 @@ public class ClientUtils {
                 if (result == null || logoutCallback == null) return;
 
                 if (result) {
-                    logoutCallback.onLogoutSuccess();
-                } else {
                     logoutCallback.onLogoutFailed();
+                } else {
+                    logoutCallback.onLogoutSuccess();
                 }
             }
         }.execute();

@@ -144,6 +144,13 @@ public class PlacesPresenterTest {
         verify(view).showCreditCardForm(TestConstants.PLACE_SAITAMA);
     }
 
+    @Test
+    public void logoutRequested_Success() {
+        presenter.onLogoutRequested();
+
+        verify(view).logout();
+    }
+
     @After
     public void tearDown() {
         presenter.detachView();

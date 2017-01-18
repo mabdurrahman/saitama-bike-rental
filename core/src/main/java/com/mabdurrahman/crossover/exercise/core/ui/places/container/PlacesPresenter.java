@@ -96,4 +96,11 @@ public class PlacesPresenter extends BasePresenter<PlacesContract.View> implemen
 
         view.showCreditCardForm(place);
     }
+
+    @Override
+    public void onLogoutRequested() {
+        if (!isViewAttached()) return;
+
+        view.logout();
+    }
 }

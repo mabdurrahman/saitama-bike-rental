@@ -15,15 +15,19 @@
  */
 package com.mabdurrahman.crossover.exercise.ui.places;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +36,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.mabdurrahman.crossover.exercise.R;
 import com.mabdurrahman.crossover.exercise.core.data.DataManager;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
 import com.mabdurrahman.crossover.exercise.core.ui.places.container.PlacesContract;
 import com.mabdurrahman.crossover.exercise.core.ui.places.container.PlacesPresenter;
+import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
+import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
+import com.mabdurrahman.crossover.exercise.ui.register.RegisterActivity;
+import com.mabdurrahman.crossover.exercise.util.ProgressUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +95,8 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
 
     private PlacesViewTypePagerAdapter placesViewTypePagerAdapter;
 
+    private MaterialDialog progressDialog = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +135,20 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
     @Override
     protected boolean shouldPadToolbarOnTransparentStatusBar() {
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     protected void setupViews() {
@@ -239,6 +264,45 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
         if (places.isEmpty()) return;
 
         viewPager.setCurrentItem(1);
+    }
+
+    @Override
+    public void logout() {
+        ClientUtils.logoutActiveUser(this, new ClientUtils.LogoutCallback() {
+            @Override
+            public void onLogoutStarted() {
+                progressDialog = ProgressUtils.show(PlacesActivity.this, getString(R.string._logging_out), getString(R.string._please_wait));
+            }
+
+            @Override
+            public void onLogoutSuccess() {
+                hideProgress();
+
+                Intent intent = IntentCompat.makeRestartActivityTask(new Intent(PlacesActivity.this, LoginActivity.class).getComponent());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLogoutFailed() {
+                hideProgress();
+
+                showAlert("Failed to logout, please contact support!");
+            }
+
+            private void hideProgress() {
+                if (progressDialog != null) {
+                    try {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                    } catch (Exception e) {
+                        // ignore
+                    }
+
+                    progressDialog = null;
+                }
+            }
+        });
     }
 
     @Override

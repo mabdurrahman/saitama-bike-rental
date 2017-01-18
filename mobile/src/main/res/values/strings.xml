@@ -30,6 +30,9 @@
     <string name="label_login">Already have login?</string>
     <string name="label_register">Don\'t have login?</string>
 
+    <!-- Menus -->
+    <string name="action_logout">Logout</string>
+
     <!-- Buttons -->
     <string name="btn_login">Login</string>
     <string name="btn_register">Register</string>

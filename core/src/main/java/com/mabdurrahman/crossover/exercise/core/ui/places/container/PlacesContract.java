@@ -35,6 +35,8 @@ public interface PlacesContract {
 
         void onConfirmBikeRental(Place place);
 
+        void onLogoutRequested();
+
     }
 
     interface View extends RemoteView {
@@ -48,6 +50,8 @@ public interface PlacesContract {
         void showPikeRentalConfirmation(Place place);
 
         void showCreditCardForm(Place place);
+
+        void logout();
 
     }
 }

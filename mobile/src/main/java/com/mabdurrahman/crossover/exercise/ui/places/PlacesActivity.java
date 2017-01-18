@@ -268,7 +268,7 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
         @Override
         public Fragment getItem(int position) {
             // FIXME Should be replaced with proper Fragments
-            return new Fragment();
+            return position == 0? PlacesListFragment.newInstance(places) : new Fragment();
         }
 
         @Override

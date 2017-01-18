@@ -44,6 +44,8 @@ allprojects {
         leakCanaryVersion = '1.5'
         
         junitVersion = '4.12'
+        mockitoVersion = '1.10.19'
+        powermockVersion = '1.6.4'
         espressoVersion = '2.2.2'
         testRunnerVersion = '0.5'
     }

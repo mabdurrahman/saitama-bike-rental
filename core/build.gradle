@@ -66,6 +66,11 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
     compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     
+    // Crashlytics Kit
+    compile("com.crashlytics.sdk.android:crashlytics:$fabricVersion@aar") {
+        transitive = true
+    }
+    
     // LeakCanary
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"

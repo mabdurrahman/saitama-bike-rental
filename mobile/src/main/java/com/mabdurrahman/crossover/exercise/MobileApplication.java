@@ -16,7 +16,14 @@
 
 package com.mabdurrahman.crossover.exercise;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.webkit.WebView;
+
+import com.crashlytics.android.Crashlytics;
 import com.mabdurrahman.crossover.exercise.core.CoreApplication;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MobileApplication extends CoreApplication {
 
@@ -33,8 +40,17 @@ public class MobileApplication extends CoreApplication {
     }
 
     @Override
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                WebView.setWebContentsDebuggingEnabled(true);
+            }
+        } else {
+            Fabric.with(this, new Crashlytics());
+        }
     }
 
 }

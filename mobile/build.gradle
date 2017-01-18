@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'let'
 
 android {
@@ -30,6 +31,8 @@ android {
         debug {
             debuggable true
             minifyEnabled false
+            // Disable fabric build ID generation for debug builds
+            ext.enableCrashlytics = false
         }
 
         release {

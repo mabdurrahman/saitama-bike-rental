@@ -28,4 +28,13 @@
     <string name="error_password_capital_letters">Your password must include at least one capital letter</string>
     <string name="error_password_numbers">Your password must include at least one number</string>
 
+    <string name="error_creditcard_length">The Credit Card number must be 16 numbers long</string>
+    <string name="error_creditcard_invalid_cardtype">Invalid Credit Card format</string>
+    <string name="error_creditcard_invalid_visa">Invalid Visa format</string>
+    <string name="error_creditcard_invalid_mastercard">Invalid MasterCard format</string>
+
+    <string name="error_creditcard_invalid_expiry">Invalid Expiry Date</string>
+    <string name="error_creditcard_invalid_expiry_month">Invalid Expiry Month</string>
+    <string name="error_creditcard_invalid_expiry_year">Invalid Expiry Year</string>
+
 </resources>

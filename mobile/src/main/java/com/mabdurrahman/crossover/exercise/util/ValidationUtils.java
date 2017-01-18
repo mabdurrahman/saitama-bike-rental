@@ -20,8 +20,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.mabdurrahman.crossover.exercise.BuildConfig;
 import com.mabdurrahman.crossover.exercise.R;
 
+import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
 /**
@@ -106,6 +108,85 @@ public class ValidationUtils {
             view.setError(view.getContext().getString(R.string.error_password_numbers));
         } else {
             view.setError(null);
+        }
+
+        return isValid;
+    }
+
+    public static boolean isValidCreditCard(EditText view) {
+        if (view == null || view.getText() == null)
+            return false;
+
+        boolean isValid = true;
+
+        String str = view.getText().toString();
+        str = str.replaceAll("[\\s-]", "");
+
+        CreditCardUtils.CreditCardType creditCardType = null;
+        if (str == null) {
+            isValid = false;
+            view.setError(view.getContext().getString(R.string.error_required));
+        } else if (str.trim().length() != 16) {
+            isValid = false;
+            view.setError(view.getContext().getString(R.string.error_creditcard_length));
+        } else if (BuildConfig.DEBUG && str.trim().equals("4111111111111111") || str.trim().equals("4000000000000002")) {
+            // FIXME valid for testing purposes only
+        } else if ((creditCardType = CreditCardUtils.findCardType(str.trim())) == null) {
+            isValid = false;
+            view.setError(view.getContext().getString(R.string.error_creditcard_invalid_cardtype));
+        } else if (creditCardType.equals(CreditCardUtils.CardType.VISA) && !CreditCardUtils.validateCard(str.trim())) {
+            isValid = false;
+            view.setError(view.getContext().getString(R.string.error_creditcard_invalid_visa));
+        } else if (creditCardType.equals(CreditCardUtils.CardType.MASTERCARD) && !CreditCardUtils.validateCard(str.trim())) {
+            isValid = false;
+            view.setError(view.getContext().getString(R.string.error_creditcard_invalid_mastercard));
+        }
+
+        return isValid;
+    }
+
+    public static boolean isValidMMYY(EditText view) {
+        if (view == null || view.getText() == null)
+            return false;
+
+        boolean isValid = true;
+
+        String str = view.getText().toString();
+        str = str.replace("/", "");
+
+        if (str.length() < 4) {
+            isValid = false;
+            view.setError(view.getContext().getString(R.string.error_creditcard_invalid_expiry));
+        } else {
+            int currentYear = GregorianCalendar.getInstance().get(GregorianCalendar.YEAR) - 2000;
+
+            int expiryMonth = 0;
+            int expiryYear = 0;
+
+            try {
+                expiryMonth = Integer.parseInt(str.substring(0, 2));
+                expiryYear = Integer.parseInt(str.substring(2, 4));
+            } catch (Exception e) {
+                // ignore
+            }
+
+            if (expiryYear == 0 || expiryMonth == 0) {
+                isValid = false;
+                view.setError(view.getContext().getString(R.string.error_creditcard_invalid_expiry));
+            } else if (expiryMonth < 0 || expiryMonth > 12) {
+                isValid = false;
+                view.setError(view.getContext().getString(R.string.error_creditcard_invalid_expiry_month));
+            } else if (expiryYear < currentYear || expiryYear > currentYear + 20) {
+                isValid = false;
+                view.setError(view.getContext().getString(R.string.error_creditcard_invalid_expiry_year));
+            } else if (expiryYear == currentYear) {
+                int currentMonth = GregorianCalendar.getInstance().get(GregorianCalendar.MONTH);
+
+                if (expiryMonth < currentMonth) {
+                    isValid = false;
+                    view.setError(view.getContext().getString(R.string.error_creditcard_invalid_expiry_month));
+                }
+            }
         }
 
         return isValid;

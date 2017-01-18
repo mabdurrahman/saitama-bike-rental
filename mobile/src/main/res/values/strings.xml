@@ -20,10 +20,16 @@
 
     <!-- Activities Names -->
     <string name="activity_places">Bike Places</string>
+    <string name="activity_rent">Rent Bike</string>
 
     <!-- EditText Hints -->
     <string name="edit_password">Password</string>
     <string name="edit_login_email">Email</string>
+
+    <string name="edit_card_number">Card number</string>
+    <string name="edit_card_holder">Card holder name</string>
+    <string name="edit_card_expires">Expires MM/YY</string>
+    <string name="edit_card_cvv">CVV</string>
 
     <!-- Labels -->
     <string name="label_get_directions">Get Directions</string>
@@ -39,9 +45,13 @@
     <string name="btn_try_again">Try Again</string>
     <string name="btn_check_again">Check Again</string>
 
+    <string name="btn_rent">Rent</string>
+
     <!-- Progress Messages -->
     <string name="_please_wait">Please wait&#8230;</string>
     <string name="_logging_in">Logging in&#8230;</string>
     <string name="_registering">Signing up&#8230;</string>
     <string name="_logging_out">Logging out&#8230;</string>
+    <string name="_sending_request">Sending request&#8230;</string>
+
 </resources>

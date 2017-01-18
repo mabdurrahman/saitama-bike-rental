@@ -28,6 +28,12 @@
         <!-- Unreveal Icon -->
         <attr name="met_unrevealIcon" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="MaskedEditText">
+        <attr name="msk_mask" format="string"/>
+        <attr name="msk_char_representation" format="string" />
+        <attr name="msk_mask_fill" format="string" />
+    </declare-styleable>
     
     <declare-styleable name="StatusBarSpacer">
         <attr name="statusBackground" format="reference|color" />

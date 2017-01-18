@@ -17,6 +17,7 @@ package com.mabdurrahman.crossover.exercise.ui.base;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -182,6 +183,14 @@ public abstract class BaseActivity extends AppCompatActivity implements RuntimeP
         new MaterialDialog.Builder(this)
                 .content(message)
                 .positiveText(android.R.string.ok)
+                .show();
+    }
+
+    protected void showAlert(String message, DialogInterface.OnDismissListener onDismissListener) {
+        new MaterialDialog.Builder(this)
+                .content(message)
+                .positiveText(android.R.string.ok)
+                .dismissListener(onDismissListener)
                 .show();
     }
 

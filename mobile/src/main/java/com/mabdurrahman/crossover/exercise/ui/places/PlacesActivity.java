@@ -46,6 +46,7 @@ import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
 import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
 import com.mabdurrahman.crossover.exercise.ui.register.RegisterActivity;
+import com.mabdurrahman.crossover.exercise.ui.rent.RentActivity;
 import com.mabdurrahman.crossover.exercise.util.ProgressUtils;
 
 import java.util.ArrayList;
@@ -319,7 +320,10 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
 
     @Override
     public void showCreditCardForm(Place place) {
+        Intent intent = new Intent(this, RentActivity.class);
+        intent.putExtra(RentActivity.EXTRA_PLACE, place);
 
+        startActivity(intent);
     }
 
     public class PlacesViewTypePagerAdapter extends FragmentStatePagerAdapter {

@@ -18,7 +18,8 @@
 
     <!-- General Errors -->
     <string name="error_no_items_to_display">No items to display</string>
-    <string name="error_generic_server_error">There was na error contacting the server, %1$s</string>
+    <string name="error_generic_server_error">There was an error contacting the server, %1$s</string>
+    <string name="error_logout">Failed to logout, please contact support!</string>
 
     <!-- Validation Errors -->
     <string name="error_required">This field is required</string>

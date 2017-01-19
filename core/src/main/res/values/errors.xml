@@ -18,5 +18,5 @@
     <string name="error_unknown">Oh no! Looks like there\'s a problem. please try again a bit later!</string>
     <string name="error_check_connection">Looks like there\'s no Internet connection. Please connect to the Internet and try again!</string>
     <string name="error_server">Looks like we\'re facing some troubles on our servers. Please check later or request for support!</string>
-    <string name="error_unauthorized">Unauthorized transaction, please check your login and try again!</string>
+    <string name="error_unauthorized">Unauthorized transaction</string>
 </resources>

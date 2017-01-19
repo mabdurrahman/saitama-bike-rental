@@ -153,7 +153,7 @@ public class RentActivity extends BaseActivity implements RentContract.View {
 
     @Override
     public void showBikeRentalSuccess() {
-        showAlert("Congratulation! You have just rent a bike in " + place.getName() + "\nWe hope you enjoy the experience!",
+        showAlert(getString(R.string.msg_congratulation_rent, place.getName()),
                 new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {

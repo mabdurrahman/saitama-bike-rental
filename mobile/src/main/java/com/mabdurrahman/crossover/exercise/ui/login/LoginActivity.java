@@ -159,7 +159,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void showUnauthorizedError() {
-        showAlert(R.string.error_unauthorized);
+        showAlert(getString(R.string.error_generic_server_error, getString(R.string.error_unauthorized)));
     }
 
     @Override

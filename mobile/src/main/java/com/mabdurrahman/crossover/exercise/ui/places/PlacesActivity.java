@@ -45,7 +45,6 @@ import com.mabdurrahman.crossover.exercise.core.ui.places.container.PlacesPresen
 import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
 import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
-import com.mabdurrahman.crossover.exercise.ui.register.RegisterActivity;
 import com.mabdurrahman.crossover.exercise.ui.rent.RentActivity;
 import com.mabdurrahman.crossover.exercise.util.ProgressUtils;
 
@@ -215,7 +214,7 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
     @Override
     public void showUnauthorizedError() {
         messageImage.setImageResource(R.drawable.ic_error_list);
-        messageText.setText(getString(R.string.error_generic_server_error, "Unauthorized"));
+        messageText.setText(getString(R.string.error_generic_server_error, getString(R.string.error_unauthorized)));
         messageBtn.setText(R.string.btn_try_again);
         showMessageLayout(true);
     }
@@ -248,9 +247,6 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
         places.addAll(placeList);
 
         placesViewTypePagerAdapter.notifyDataSetChanged();
-
-        // viewPager.setAdapter(placesViewTypePagerAdapter);
-        // tabsLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -287,7 +283,7 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
             public void onLogoutFailed() {
                 hideProgress();
 
-                showAlert("Failed to logout, please contact support!");
+                showAlert(getString(R.string.error_logout));
             }
 
             private void hideProgress() {
@@ -308,8 +304,8 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
 
     @Override
     public void showPikeRentalConfirmation(final Place place) {
-        Snackbar snackbar = Snackbar.make(rootContainer, "Are you sure you want to rent pike in " + place.getName() + "?", Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction("Yes", new View.OnClickListener() {
+        Snackbar snackbar = Snackbar.make(rootContainer, getString(R.string.msg_confirm_rent, place.getName()), Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(R.string.btn_rent, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.onConfirmBikeRental(place);
@@ -345,7 +341,7 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return position == 0? "List View" : "Map View";
+            return position == 0? getString(R.string.label_list_view) : getString(R.string.label_map_view);
         }
     }
 }

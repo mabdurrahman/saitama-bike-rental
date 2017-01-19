@@ -32,6 +32,9 @@
     <string name="edit_card_cvv">CVV</string>
 
     <!-- Labels -->
+    <string name="label_list_view">List View</string>
+    <string name="label_map_view">Map View</string>
+
     <string name="label_get_directions">Get Directions</string>
     <string name="label_login">Already have login?</string>
     <string name="label_register">Don\'t have login?</string>
@@ -46,6 +49,10 @@
     <string name="btn_check_again">Check Again</string>
 
     <string name="btn_rent">Rent</string>
+
+    <!-- Messages -->
+    <string name="msg_confirm_rent">Are you sure you want to rent pike in %s?</string>
+    <string name="msg_congratulation_rent">Congratulation! You have just rent a bike in %s.\nWe hope you enjoy the experience!</string>
 
     <!-- Progress Messages -->
     <string name="_please_wait">Please wait&#8230;</string>

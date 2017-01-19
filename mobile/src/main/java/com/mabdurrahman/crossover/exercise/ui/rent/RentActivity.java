@@ -138,14 +138,14 @@ public class RentActivity extends BaseActivity implements RentContract.View {
         if (!ValidationUtils.isValidString(cardNumberEdit) || !ValidationUtils.isValidCreditCard(cardNumberEdit)) {
             cardNumberEdit.requestFocus();
             return false;
-        } else if (!ValidationUtils.isValidString(cardHolderEdit)) {
-            cardHolderEdit.requestFocus();
-            return false;
         } else if (!ValidationUtils.isValidString(cardExpiresEdit) || !ValidationUtils.isValidMMYY(cardExpiresEdit)) {
             cardExpiresEdit.requestFocus();
             return false;
-        } else if (!ValidationUtils.isValidStringLength(cardCVVEdit, 3)) {
+        } else if (!ValidationUtils.isValidString(cardCVVEdit) || !ValidationUtils.isValidStringLength(cardCVVEdit, 3)) {
             cardCVVEdit.requestFocus();
+            return false;
+        } else if (!ValidationUtils.isValidString(cardHolderEdit)) {
+            cardHolderEdit.requestFocus();
             return false;
         }
         return true;

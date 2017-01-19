@@ -60,6 +60,8 @@ import icepick.State;
  */
 public class PlacesActivity extends BaseActivity implements PlacesContract.View {
 
+    public static final String EXTRA_PLACES = "EXTRA_PLACES";
+
     @Bind(R.id.container_root)
     protected ViewGroup rootContainer;
 
@@ -96,6 +98,15 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
     private PlacesViewTypePagerAdapter placesViewTypePagerAdapter;
 
     private MaterialDialog progressDialog = null;
+
+    @Override
+    protected void onLaunch() {
+        super.onLaunch();
+
+        if (getIntent().hasExtra(EXTRA_PLACES)) {
+            places = getIntent().getParcelableArrayListExtra(EXTRA_PLACES);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

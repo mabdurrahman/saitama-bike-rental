@@ -73,6 +73,7 @@ dependencies {
     
     // LeakCanary
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     

@@ -23,7 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
-import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
+import com.mabdurrahman.crossover.exercise.ui.register.RegisterActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,12 +51,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/19/17.
  */
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class RegisterActivityTest {
 
     @Rule
-    public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<RegisterActivity> activityRule = new ActivityTestRule<>(RegisterActivity.class);
 
-    private LoginActivity activity;
+    private RegisterActivity activity;
 
     @Before
     public void setup() {
@@ -74,21 +74,21 @@ public class LoginActivityTest {
                 .check(matches(isDisplayed()));
         onView(withId(R.id.edit_password))
                 .check(matches(isDisplayed()));
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.btn_register))
                 .check(matches(isDisplayed()));
-        onView(withId(R.id.label_register))
+        onView(withId(R.id.label_login))
                 .check(matches(isDisplayed()));
     }
 
     @Test
-    public void isLoginButtonClickable() {
-        onView(withId(R.id.btn_login))
+    public void isRegisterButtonClickable() {
+        onView(withId(R.id.btn_register))
                 .check(matches(isClickable()));
     }
 
     @Test
-    public void isRegistrationLinkClickable() {
-        onView(withId(R.id.label_register))
+    public void isLoginLinkClickable() {
+        onView(withId(R.id.label_login))
                 .check(matches(isClickable()));
     }
 
@@ -99,8 +99,8 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginEmailValidation_Empty() {
-        onView(withId(R.id.btn_login))
+    public void registerEmailValidation_Empty() {
+        onView(withId(R.id.btn_register))
                 .perform(click());
 
         onView(withId(R.id.edit_email))
@@ -108,11 +108,11 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginEmailValidation_InvalidFormat() {
+    public void registerEmailValidation_InvalidFormat() {
         onView(withId(R.id.edit_email))
                 .perform(typeText("invalidemailformat$$!@!crossover.com"), closeSoftKeyboard());
 
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.btn_register))
                 .perform(click());
 
         onView(withId(R.id.edit_email))
@@ -120,11 +120,11 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginEmailValidation_ValidFormat() {
+    public void registerEmailValidation_ValidFormat() {
         onView(withId(R.id.edit_email))
                 .perform(typeText("crossover@crossover.com"), closeSoftKeyboard());
 
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.btn_register))
                 .perform(click());
 
         onView(withId(R.id.edit_email))
@@ -132,11 +132,11 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginPasswordValidation_Empty() {
+    public void registerPasswordValidation_Empty() {
         onView(withId(R.id.edit_email))
                 .perform(typeText("crossover@crossover.com"), closeSoftKeyboard());
 
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.btn_register))
                 .perform(click());
 
         onView(withId(R.id.edit_password))
@@ -144,13 +144,13 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginWithButton_Success() {
+    public void registerWithButton_Success() {
         onView(withId(R.id.edit_email))
                 .perform(typeText("crossover@crossover.com"), closeSoftKeyboard());
         onView(withId(R.id.edit_password))
                 .perform(typeText("crossover"), closeSoftKeyboard());
 
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.btn_register))
                 .perform(click());
 
         onView(allOf(isAssignableFrom(TextView.class),
@@ -159,13 +159,13 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginWithButton_InvalidLogin_Failed() {
+    public void registerWithButton_InvalidLogin_Failed() {
         onView(withId(R.id.edit_email))
                 .perform(typeText("invalid.crossover@crossover.com"), closeSoftKeyboard());
         onView(withId(R.id.edit_password))
                 .perform(typeText("crossover"), closeSoftKeyboard());
 
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.btn_register))
                 .perform(click());
 
         onView(withText(android.R.string.ok))
@@ -174,7 +174,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginWithButton_NoConnection_Failed() {
+    public void registerWithButton_NoConnection_Failed() {
         WifiManager wifi = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
         boolean wifiOriginallyEnabled = wifi.isWifiEnabled();
         if (wifiOriginallyEnabled) {
@@ -186,7 +186,7 @@ public class LoginActivityTest {
         onView(withId(R.id.edit_password))
                 .perform(typeText("crossover"), closeSoftKeyboard());
 
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.btn_register))
                 .perform(click());
 
         onView(withText(android.R.string.ok))
@@ -199,7 +199,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void loginWithImeAction_Success() {
+    public void registerWithImeAction_Success() {
         onView(withId(R.id.edit_email))
                 .perform(typeText("crossover@crossover.com"), closeSoftKeyboard());
         onView(withId(R.id.edit_password))
@@ -214,11 +214,11 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void registerLink_Success() {
-        onView(withId(R.id.label_register))
+    public void loginLink_Success() {
+        onView(withId(R.id.label_login))
                 .perform(click());
 
-        onView(withText(R.string.btn_register))
+        onView(withText(R.string.btn_login))
                 .check(matches(isDisplayed()));
 
     }

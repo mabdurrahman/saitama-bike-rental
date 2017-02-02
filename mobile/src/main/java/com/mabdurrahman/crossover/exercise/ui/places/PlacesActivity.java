@@ -38,11 +38,11 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mabdurrahman.crossover.exercise.R;
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ClientHelper;
 import com.mabdurrahman.crossover.exercise.core.ui.places.container.PlacesContract;
 import com.mabdurrahman.crossover.exercise.core.ui.places.container.PlacesPresenter;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
 import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
 import com.mabdurrahman.crossover.exercise.ui.rent.RentActivity;
@@ -112,7 +112,7 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new PlacesPresenter(DataManager.getInstance());
+        presenter = new PlacesPresenter();
         presenter.attachView(this);
 
         setupViews();
@@ -276,7 +276,7 @@ public class PlacesActivity extends BaseActivity implements PlacesContract.View 
 
     @Override
     public void logout() {
-        ClientUtils.logoutActiveUser(this, new ClientUtils.LogoutCallback() {
+        CoreApplication.getClientHelper().logoutActiveUser(new ClientHelper.LogoutCallback() {
             @Override
             public void onLogoutStarted() {
                 progressDialog = ProgressUtils.show(PlacesActivity.this, getString(R.string._logging_out), getString(R.string._please_wait));

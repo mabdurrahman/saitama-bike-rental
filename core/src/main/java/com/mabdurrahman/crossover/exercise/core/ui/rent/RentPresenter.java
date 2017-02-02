@@ -17,9 +17,9 @@ package com.mabdurrahman.crossover.exercise.core.ui.rent;
 
 import android.support.annotation.NonNull;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceError;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceError;
 import com.mabdurrahman.crossover.exercise.core.ui.base.BasePresenter;
 
 /**
@@ -27,11 +27,7 @@ import com.mabdurrahman.crossover.exercise.core.ui.base.BasePresenter;
  */
 public class RentPresenter extends BasePresenter<RentContract.View> implements RentContract.ViewActions {
 
-    @NonNull
-    private DataManager dataManager;
-
-    public RentPresenter(@NonNull DataManager dataManager) {
-        this.dataManager = dataManager;
+    public RentPresenter() {
     }
 
     @Override
@@ -41,7 +37,7 @@ public class RentPresenter extends BasePresenter<RentContract.View> implements R
         view.showMessageLayout(false);
         view.showProgress();
 
-        dataManager.rentBike(creditCardNo, holderName, expirationDate, securityCode, new DataSourceCallback<String>() {
+        CoreApplication.getDataService().rentBike(creditCardNo, holderName, expirationDate, securityCode, new DataServiceCallback<String>() {
             @Override
             public void onSuccess(String s) {
                 if (!isViewAttached()) return;
@@ -59,7 +55,7 @@ public class RentPresenter extends BasePresenter<RentContract.View> implements R
             }
 
             @Override
-            public void onFailed(@NonNull DataSourceError error) {
+            public void onFailed(@NonNull DataServiceError error) {
                 if (!isViewAttached()) return;
 
                 view.hideProgress();

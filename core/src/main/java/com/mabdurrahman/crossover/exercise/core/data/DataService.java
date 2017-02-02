@@ -22,13 +22,13 @@ import java.util.List;
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
  */
-public interface DataSource {
+public interface DataService {
 
-    void authenticateUser(String email, String password, DataSourceCallback<String> authenticationCallback);
+    void authenticateUser(String email, String password, DataServiceCallback<String> authenticationCallback);
 
-    void registerNewUser(String email, String password, DataSourceCallback<String> authenticationCallback);
+    void registerNewUser(String email, String password, DataServiceCallback<String> authenticationCallback);
 
-    void getPlaces(DataSourceCallback<List<Place>> placesCallback);
+    void getPlaces(DataServiceCallback<List<Place>> placesCallback);
 
-    void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, DataSourceCallback<String> rentCallback);
+    void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, DataServiceCallback<String> rentCallback);
 }

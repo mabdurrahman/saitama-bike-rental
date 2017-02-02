@@ -23,10 +23,9 @@ import android.widget.Button;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mabdurrahman.crossover.exercise.R;
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
 import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterContract;
 import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterPresenter;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.base.BaseActivity;
 import com.mabdurrahman.crossover.exercise.ui.login.LoginActivity;
 import com.mabdurrahman.crossover.exercise.ui.places.PlacesActivity;
@@ -62,7 +61,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new RegisterPresenter(DataManager.getInstance());
+        presenter = new RegisterPresenter();
         presenter.attachView(this);
 
         setupViews();
@@ -85,7 +84,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     }
 
     protected void setupViews() {
-        String latestLoggedEmail = ClientUtils.getLatestLoggedEmail();
+        String latestLoggedEmail = CoreApplication.getClientHelper().getLatestLoggedEmail();
         if (TextUtils.isEmpty(emailEdit.getText()) && !TextUtils.isEmpty(latestLoggedEmail)) {
             emailEdit.setText(latestLoggedEmail);
         }

@@ -17,12 +17,11 @@ package com.mabdurrahman.crossover.exercise.core;
 
 import android.text.TextUtils;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
-import com.mabdurrahman.crossover.exercise.core.mock.MockDataSource;
+import com.mabdurrahman.crossover.exercise.core.data.DataService;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
+import com.mabdurrahman.crossover.exercise.core.mock.MockDependencyInjection;
 import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterContract;
 import com.mabdurrahman.crossover.exercise.core.ui.register.RegisterPresenter;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.core.util.TestConstants;
 
 import org.junit.After;
@@ -40,43 +39,40 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
-import static org.powermock.api.mockito.PowerMockito.doNothing;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.spy;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ TextUtils.class, ClientUtils.class })
+@PrepareForTest({ TextUtils.class })
 public class RegisterPresenterTest {
-
-    @Mock
-    private DataManager dataManager = spy(new DataManager(new MockDataSource()));
 
     @Mock
     private RegisterContract.View view;
 
     @Captor
-    private ArgumentCaptor<DataSourceCallback<String>> authenticationCallbackCaptor;
+    private ArgumentCaptor<DataServiceCallback<String>> authenticationCallbackCaptor;
 
     private RegisterPresenter presenter;
+    private DataService dataService;
 
     @Before
     public void setUp() {
-        presenter = new RegisterPresenter(dataManager);
+        MockDependencyInjection.initMockInjector();
+
+        dataService = CoreApplication.getDataService();
+
+        presenter = new RegisterPresenter();
         presenter.attachView(view);
     }
 
     @Test
     public void registerRequested_Success() throws Exception {
-        mockStatic(TextUtils.class, ClientUtils.class);
+        mockStatic(TextUtils.class);
 
         when(TextUtils.isEmpty(any(CharSequence.class))).thenReturn(false);
-        doNothing().when(ClientUtils.class);
-
-        ClientUtils.setAuthToken(TestConstants.FAKE_AUTH_TOKEN);
 
         presenter.onRegisterRequested(TestConstants.VALID_USERNAME, TestConstants.VALID_PASSWORD);
 
@@ -84,7 +80,7 @@ public class RegisterPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
+        verify(dataService).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showPlacesList();
@@ -99,7 +95,7 @@ public class RegisterPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
+        verify(dataService).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showUnauthorizedError();
@@ -114,14 +110,14 @@ public class RegisterPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
+        verify(dataService).registerNewUser(anyString(), anyString(), authenticationCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showError(TestConstants.ERROR_INVALID_CREDENTIALS.getMessage());
     }
 
     @Test
-    public void registerationRequested_Success() {
+    public void loginRequested_Success() {
         presenter.onLoginRequested();
 
         verify(view).showLoginForm();

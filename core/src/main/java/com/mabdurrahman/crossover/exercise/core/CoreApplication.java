@@ -18,14 +18,23 @@ package com.mabdurrahman.crossover.exercise.core;
 
 import android.app.Application;
 
+import com.mabdurrahman.crossover.exercise.core.data.DataManager;
+import com.mabdurrahman.crossover.exercise.core.data.DataService;
+import com.mabdurrahman.crossover.exercise.core.data.network.RemoteDataService;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ClientHelper;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ConnectivityHelper;
+import com.mabdurrahman.crossover.exercise.core.module.impl.AndroidClientHelper;
+import com.mabdurrahman.crossover.exercise.core.module.impl.AndroidConnectivityHelper;
+import com.mabdurrahman.crossover.exercise.core.module.ModulesWrapper;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 public class CoreApplication extends Application {
 
-    protected RefWatcher refWatcher;
-
+    private static CoreComponent injector;
     private static CoreApplication instance;
+
+    protected RefWatcher refWatcher;
 
     public CoreApplication() {
         instance = this;
@@ -40,9 +49,33 @@ public class CoreApplication extends Application {
         super.onCreate();
 
         refWatcher = LeakCanary.install(this);
+
+        CoreComponent component = DaggerCoreComponent.builder()
+                .coreModule(new CoreModule(new AndroidClientHelper(), new AndroidConnectivityHelper()))
+                .dataManager(new DataManager(new RemoteDataService()))
+                .build();
+
+        CoreApplication.setInjector(component);
     }
     
     public RefWatcher getRefWatcher() {
         return refWatcher;
+    }
+
+    public static void setInjector(CoreComponent newInjector) {
+        injector = newInjector;
+        injector.inject(ModulesWrapper.getInstance());
+    }
+
+    public static DataService getDataService() {
+        return ModulesWrapper.getInstance().getDataService();
+    }
+
+    public static ClientHelper getClientHelper() {
+        return ModulesWrapper.getInstance().getClientHelper();
+    }
+
+    public static ConnectivityHelper getConnectivityHelper() {
+        return ModulesWrapper.getInstance().getConnectivityHelper();
     }
 }

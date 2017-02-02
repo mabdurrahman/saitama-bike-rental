@@ -15,12 +15,12 @@
  */
 package com.mabdurrahman.crossover.exercise.core;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
-import com.mabdurrahman.crossover.exercise.core.mock.MockDataSource;
+import com.mabdurrahman.crossover.exercise.core.data.DataService;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ClientHelper;
+import com.mabdurrahman.crossover.exercise.core.mock.MockDependencyInjection;
 import com.mabdurrahman.crossover.exercise.core.ui.rent.RentContract;
 import com.mabdurrahman.crossover.exercise.core.ui.rent.RentPresenter;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.core.util.TestConstants;
 
 import org.junit.After;
@@ -31,44 +31,43 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.spy;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ ClientUtils.class })
 public class RentPresenterTest {
-
-    @Mock
-    private DataManager dataManager = spy(new DataManager(new MockDataSource()));
 
     @Mock
     private RentContract.View view;
 
     @Captor
-    private ArgumentCaptor<DataSourceCallback<String>> rentBikeCallbackCaptor;
+    private ArgumentCaptor<DataServiceCallback<String>> rentBikeCallbackCaptor;
 
     private RentPresenter presenter;
+    private ClientHelper clientHelper;
+    private DataService dataService;
 
     @Before
     public void setUp() {
-        presenter = new RentPresenter(dataManager);
+        MockDependencyInjection.initMockInjector();
+
+        clientHelper = CoreApplication.getClientHelper();
+        dataService = CoreApplication.getDataService();
+
+        presenter = new RentPresenter();
         presenter.attachView(view);
     }
 
     @Test
     public void bikeRentalRequested_Success() {
-        mockStatic(ClientUtils.class);
-        when(ClientUtils.isLoggedin()).thenReturn(true);
+        when(clientHelper.isLoggedin()).thenReturn(true);
 
         presenter.onBikeRentalRequested(TestConstants.VALID_CREDIT_CARD_NO,
                 TestConstants.VALID_HOLDER_NAME,
@@ -79,7 +78,7 @@ public class RentPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).rentBike(anyString(), anyString(), anyString(), anyString(), rentBikeCallbackCaptor.capture());
+        verify(dataService).rentBike(anyString(), anyString(), anyString(), anyString(), rentBikeCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showBikeRentalSuccess();
@@ -87,8 +86,7 @@ public class RentPresenterTest {
 
     @Test
     public void bikeRentalRequested_Unauthorized() {
-        mockStatic(ClientUtils.class);
-        when(ClientUtils.isLoggedin()).thenReturn(false);
+        when(clientHelper.isLoggedin()).thenReturn(false);
 
         presenter.onBikeRentalRequested(TestConstants.VALID_CREDIT_CARD_NO,
                 TestConstants.VALID_HOLDER_NAME,
@@ -99,7 +97,7 @@ public class RentPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).rentBike(anyString(), anyString(), anyString(), anyString(), rentBikeCallbackCaptor.capture());
+        verify(dataService).rentBike(anyString(), anyString(), anyString(), anyString(), rentBikeCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showUnauthorizedError();
@@ -107,8 +105,7 @@ public class RentPresenterTest {
 
     @Test
     public void bikeRentalRequested_Failed() {
-        mockStatic(ClientUtils.class);
-        when(ClientUtils.isLoggedin()).thenReturn(true);
+        when(clientHelper.isLoggedin()).thenReturn(true);
 
         presenter.onBikeRentalRequested(TestConstants.INVALID_CREDIT_CARD_NO,
                 TestConstants.INVALID_HOLDER_NAME,
@@ -119,7 +116,7 @@ public class RentPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).rentBike(anyString(), anyString(), anyString(), anyString(), rentBikeCallbackCaptor.capture());
+        verify(dataService).rentBike(anyString(), anyString(), anyString(), anyString(), rentBikeCallbackCaptor.capture());
 
         inOrder.verify(view).hideProgress();
         inOrder.verify(view).showError(TestConstants.ERROR_SERVER.getMessage());

@@ -13,60 +13,66 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.util;
+package com.mabdurrahman.crossover.exercise.core.module.impl;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.mabdurrahman.crossover.exercise.core.CoreApplication;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ClientHelper;
+import com.mabdurrahman.crossover.exercise.core.util.Constants;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public class ClientUtils {
+public class AndroidClientHelper extends ClientHelper {
 
     private static String latestLoggedEmail;
     private static String authToken;
 
-    public static String getLatestLoggedEmail() {
+    @Override
+    public String getLatestLoggedEmail() {
         if (latestLoggedEmail == null) {
             latestLoggedEmail = PreferenceManager.getDefaultSharedPreferences(CoreApplication.getInstance()).getString(Constants.PREF_LATEST_LOGGED_EMAIL, null);
         }
         return latestLoggedEmail;
     }
 
-    public static void setLatestLoggedEmail(final String email) {
+    @Override
+    public void setLatestLoggedEmail(final String email) {
         latestLoggedEmail = email;
 
         PreferenceManager.getDefaultSharedPreferences(CoreApplication.getInstance()).edit().putString(Constants.PREF_LATEST_LOGGED_EMAIL, email).apply();
     }
 
-    public static String getAuthToken() {
+    @Override
+    public String getAuthToken() {
         if (authToken == null) {
             authToken = PreferenceManager.getDefaultSharedPreferences(CoreApplication.getInstance()).getString(Constants.PREF_AUTH_TOKEN, null);
         }
         return authToken;
     }
 
-    public static void setAuthToken(String token) {
+    @Override
+    public void setAuthToken(String token) {
         authToken = token;
         PreferenceManager.getDefaultSharedPreferences(CoreApplication.getInstance()).edit().putString(Constants.PREF_AUTH_TOKEN, token).apply();
     }
 
-    public static boolean isLoggedin() {
-        return !TextUtils.isEmpty(ClientUtils.getAuthToken());
+    @Override
+    public boolean isLoggedin() {
+        return !TextUtils.isEmpty(getAuthToken());
     }
 
-    public static void clearUserData() {
+    @Override
+    public void clearUserData() {
         // Account
-        ClientUtils.setAuthToken(null);
+        setAuthToken(null);
     }
 
-    public static void logoutActiveUser(final Context context, final LogoutCallback logoutCallback) {
-        if (context == null) throw new NullPointerException("Argument 'context' cannot be null");
-
+    @Override
+    public void logoutActiveUser(final LogoutCallback logoutCallback) {
         new AsyncTask<Void, Void, Boolean>() {
 
             @Override
@@ -76,9 +82,9 @@ public class ClientUtils {
 
             @Override
             protected Boolean doInBackground(Void... params) {
-                ClientUtils.clearUserData();
+                clearUserData();
 
-                return ClientUtils.isLoggedin();
+                return isLoggedin();
             }
 
             @Override
@@ -92,14 +98,6 @@ public class ClientUtils {
                 }
             }
         }.execute();
-    }
-
-    public interface LogoutCallback {
-        void onLogoutStarted();
-
-        void onLogoutSuccess();
-
-        void onLogoutFailed();
     }
 
 }

@@ -15,30 +15,16 @@
  */
 package com.mabdurrahman.crossover.exercise.core.data;
 
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
  */
-@Module
-public class DataManager {
+public interface DataServiceCallback<T> {
 
-    private DataService dataService;
+    void onSuccess(T t);
 
-    public DataManager() {
-    }
+    void onUnauthorized();
 
-    public DataManager(DataService dataService) {
-        this.dataService = dataService;
-    }
-
-    @Provides
-    @Singleton
-    DataService provideDataService() {
-        return dataService;
-    }
-
+    void onFailed(@NonNull DataServiceError error);
 }

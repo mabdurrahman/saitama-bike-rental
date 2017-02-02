@@ -17,9 +17,9 @@ package com.mabdurrahman.crossover.exercise.core.ui.places.container;
 
 import android.support.annotation.NonNull;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceError;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceError;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
 import com.mabdurrahman.crossover.exercise.core.ui.base.BasePresenter;
 
@@ -30,11 +30,7 @@ import java.util.List;
  */
 public class PlacesPresenter extends BasePresenter<PlacesContract.View> implements PlacesContract.ViewActions {
 
-    @NonNull
-    private DataManager dataManager;
-
-    public PlacesPresenter(@NonNull DataManager dataManager) {
-        this.dataManager = dataManager;
+    public PlacesPresenter() {
     }
 
     @Override
@@ -44,7 +40,7 @@ public class PlacesPresenter extends BasePresenter<PlacesContract.View> implemen
         view.showMessageLayout(false);
         view.showProgress();
 
-        dataManager.getPlaces(new DataSourceCallback<List<Place>>() {
+        CoreApplication.getDataService().getPlaces(new DataServiceCallback<List<Place>>() {
             @Override
             public void onSuccess(List<Place> placeList) {
                 if (!isViewAttached()) return;
@@ -67,7 +63,7 @@ public class PlacesPresenter extends BasePresenter<PlacesContract.View> implemen
             }
 
             @Override
-            public void onFailed(@NonNull DataSourceError error) {
+            public void onFailed(@NonNull DataServiceError error) {
                 if (!isViewAttached()) return;
 
                 view.hideProgress();

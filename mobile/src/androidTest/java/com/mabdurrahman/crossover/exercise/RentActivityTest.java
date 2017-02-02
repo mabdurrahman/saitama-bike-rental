@@ -22,9 +22,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.inputmethod.EditorInfo;
 
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Location;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.ui.rent.RentActivity;
 
 import org.junit.After;
@@ -259,8 +259,8 @@ public class RentActivityTest {
 
     @Test
     public void rentWithButton_Success() {
-        String authToken = ClientUtils.getAuthToken();
-        ClientUtils.setAuthToken("AYqCb97qqSQ2AbMNjKR5skKQbpOpFE3oLr43A9NDFmABpIAtkgAAAAA");
+        String authToken = CoreApplication.getClientHelper().getAuthToken();
+        CoreApplication.getClientHelper().setAuthToken("AYqCb97qqSQ2AbMNjKR5skKQbpOpFE3oLr43A9NDFmABpIAtkgAAAAA");
 
         onView(withId(R.id.edit_card_number))
                 .perform(typeText("4000000000000000"), closeSoftKeyboard());
@@ -278,7 +278,7 @@ public class RentActivityTest {
                 .inRoot(isDialog())
                 .check(matches(isDisplayed()));
 
-        ClientUtils.setAuthToken(authToken);
+        CoreApplication.getClientHelper().setAuthToken(authToken);
     }
 
     @Test
@@ -312,8 +312,8 @@ public class RentActivityTest {
 
     @Test
     public void rentWithImeAction_Success() {
-        String authToken = ClientUtils.getAuthToken();
-        ClientUtils.setAuthToken("AYqCb97qqSQ2AbMNjKR5skKQbpOpFE3oLr43A9NDFmABpIAtkgAAAAA");
+        String authToken = CoreApplication.getClientHelper().getAuthToken();
+        CoreApplication.getClientHelper().setAuthToken("AYqCb97qqSQ2AbMNjKR5skKQbpOpFE3oLr43A9NDFmABpIAtkgAAAAA");
 
         onView(withId(R.id.edit_card_number))
                 .perform(typeText("4000000000000000"), closeSoftKeyboard());
@@ -331,7 +331,7 @@ public class RentActivityTest {
                 .inRoot(isDialog())
                 .check(matches(isDisplayed()));
 
-        ClientUtils.setAuthToken(authToken);
+        CoreApplication.getClientHelper().setAuthToken(authToken);
     }
 
 }

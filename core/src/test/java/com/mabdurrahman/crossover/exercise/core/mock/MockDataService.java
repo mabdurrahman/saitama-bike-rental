@@ -15,10 +15,10 @@
  */
 package com.mabdurrahman.crossover.exercise.core.mock;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataSource;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
+import com.mabdurrahman.crossover.exercise.core.data.DataService;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 import com.mabdurrahman.crossover.exercise.core.util.TestConstants;
 
 import java.util.List;
@@ -26,10 +26,13 @@ import java.util.List;
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public class MockDataSource implements DataSource {
+public class MockDataService implements DataService {
+
+    public MockDataService() {
+    }
 
     @Override
-    public void authenticateUser(String email, String password, DataSourceCallback<String> authenticationCallback) {
+    public void authenticateUser(String email, String password, DataServiceCallback<String> authenticationCallback) {
         if (email.equals(TestConstants.VALID_USERNAME) && password.equals(TestConstants.VALID_PASSWORD)) {
             authenticationCallback.onSuccess(TestConstants.FAKE_AUTH_TOKEN);
         } else if (!email.equals(TestConstants.VALID_USERNAME)) {
@@ -40,7 +43,7 @@ public class MockDataSource implements DataSource {
     }
 
     @Override
-    public void registerNewUser(String email, String password, DataSourceCallback<String> authenticationCallback) {
+    public void registerNewUser(String email, String password, DataServiceCallback<String> authenticationCallback) {
         if (email.equals(TestConstants.VALID_USERNAME) && password.equals(TestConstants.VALID_PASSWORD)) {
             authenticationCallback.onSuccess(TestConstants.FAKE_AUTH_TOKEN);
         } else if (!email.equals(TestConstants.VALID_USERNAME)) {
@@ -51,13 +54,13 @@ public class MockDataSource implements DataSource {
     }
 
     @Override
-    public void getPlaces(DataSourceCallback<List<Place>> placesCallback) {
+    public void getPlaces(DataServiceCallback<List<Place>> placesCallback) {
 
     }
 
     @Override
-    public void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, DataSourceCallback<String> rentCallback) {
-        if (!ClientUtils.isLoggedin()) {
+    public void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, DataServiceCallback<String> rentCallback) {
+        if (!CoreApplication.getClientHelper().isLoggedin()) {
             rentCallback.onUnauthorized();
         } else if (creditCardNo.equals(TestConstants.VALID_CREDIT_CARD_NO)
                 && holderName.equals(TestConstants.VALID_HOLDER_NAME)

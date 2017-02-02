@@ -13,18 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.data;
+package com.mabdurrahman.crossover.exercise.core;
 
-import android.support.annotation.NonNull;
+import com.mabdurrahman.crossover.exercise.core.data.DataManager;
+import com.mabdurrahman.crossover.exercise.core.module.ModulesWrapper;
+
+import javax.inject.Singleton;
+
+import dagger.Component;
 
 /**
- * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
+ * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/31/17.
  */
-public interface DataSourceCallback<T> {
+@Singleton
+@Component(modules = {CoreModule.class, DataManager.class})
+public interface CoreComponent {
 
-    void onSuccess(T t);
+    void inject(ModulesWrapper x);
 
-    void onUnauthorized();
-
-    void onFailed(@NonNull DataSourceError error);
 }

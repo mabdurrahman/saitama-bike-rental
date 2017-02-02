@@ -19,7 +19,7 @@ import android.content.Context;
 
 import com.mabdurrahman.crossover.exercise.core.BuildConfig;
 import com.mabdurrahman.crossover.exercise.core.CoreApplication;
-import com.mabdurrahman.crossover.exercise.core.util.ConnectivityUtils;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ConnectivityHelper;
 import com.mabdurrahman.crossover.exercise.core.util.Constants;
 
 import java.io.File;
@@ -91,8 +91,8 @@ public class RemoteRestAdapter {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            if (ConnectivityUtils.getConnectivityStatus(CoreApplication.getInstance())
-                    == ConnectivityUtils.NETWORK_DISCONNECTED_TYPE) {
+            if (CoreApplication.getConnectivityHelper().getConnectivityStatus()
+                    == ConnectivityHelper.NETWORK_DISCONNECTED_TYPE) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();

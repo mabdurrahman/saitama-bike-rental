@@ -65,6 +65,10 @@ dependencies {
     // OkHttp3
     compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
     compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    // Dagger2
+    compile "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     
     // Crashlytics Kit
     compile("com.crashlytics.sdk.android:crashlytics:$fabricVersion@aar") {

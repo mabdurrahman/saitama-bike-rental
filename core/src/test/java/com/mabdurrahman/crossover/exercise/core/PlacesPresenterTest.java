@@ -15,10 +15,10 @@
  */
 package com.mabdurrahman.crossover.exercise.core;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
+import com.mabdurrahman.crossover.exercise.core.data.DataService;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
-import com.mabdurrahman.crossover.exercise.core.mock.MockDataSource;
+import com.mabdurrahman.crossover.exercise.core.mock.MockDependencyInjection;
 import com.mabdurrahman.crossover.exercise.core.ui.places.container.PlacesContract;
 import com.mabdurrahman.crossover.exercise.core.ui.places.container.PlacesPresenter;
 import com.mabdurrahman.crossover.exercise.core.util.TestConstants;
@@ -38,7 +38,6 @@ import java.util.List;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
-import static org.powermock.api.mockito.PowerMockito.spy;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
@@ -47,19 +46,21 @@ import static org.powermock.api.mockito.PowerMockito.spy;
 public class PlacesPresenterTest {
 
     @Mock
-    private DataManager dataManager = spy(new DataManager(new MockDataSource()));
-
-    @Mock
     private PlacesContract.View view;
 
     @Captor
-    private ArgumentCaptor<DataSourceCallback<List<Place>>> getPlacesCallbackCaptor;
+    private ArgumentCaptor<DataServiceCallback<List<Place>>> getPlacesCallbackCaptor;
 
     private PlacesPresenter presenter;
+    private DataService dataService;
 
     @Before
     public void setUp() {
-        presenter = new PlacesPresenter(dataManager);
+        MockDependencyInjection.initMockInjector();
+
+        dataService = CoreApplication.getDataService();
+
+        presenter = new PlacesPresenter();
         presenter.attachView(view);
     }
 
@@ -71,7 +72,7 @@ public class PlacesPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).getPlaces(getPlacesCallbackCaptor.capture());
+        verify(dataService).getPlaces(getPlacesCallbackCaptor.capture());
         getPlacesCallbackCaptor.getValue().onSuccess(TestConstants.PLACES_LIST);
 
         inOrder.verify(view).hideProgress();
@@ -86,7 +87,7 @@ public class PlacesPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).getPlaces(getPlacesCallbackCaptor.capture());
+        verify(dataService).getPlaces(getPlacesCallbackCaptor.capture());
         getPlacesCallbackCaptor.getValue().onSuccess(TestConstants.PLACES_LIST_EMPTY);
 
         inOrder.verify(view).hideProgress();
@@ -101,7 +102,7 @@ public class PlacesPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).getPlaces(getPlacesCallbackCaptor.capture());
+        verify(dataService).getPlaces(getPlacesCallbackCaptor.capture());
         getPlacesCallbackCaptor.getValue().onUnauthorized();
 
         inOrder.verify(view).hideProgress();
@@ -116,7 +117,7 @@ public class PlacesPresenterTest {
         inOrder.verify(view).showMessageLayout(false);
         inOrder.verify(view).showProgress();
 
-        verify(dataManager).getPlaces(getPlacesCallbackCaptor.capture());
+        verify(dataService).getPlaces(getPlacesCallbackCaptor.capture());
         getPlacesCallbackCaptor.getValue().onFailed(TestConstants.ERROR_SERVER);
 
         inOrder.verify(view).hideProgress();

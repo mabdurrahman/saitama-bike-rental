@@ -21,14 +21,14 @@ import android.os.Parcelable;
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
  */
-public class DataSourceError implements Parcelable {
+public class DataServiceError implements Parcelable {
 
     private String message;
 
-    public DataSourceError() {
+    public DataServiceError() {
     }
 
-    public DataSourceError(String message) {
+    public DataServiceError(String message) {
         this.message = message;
     }
 
@@ -50,19 +50,19 @@ public class DataSourceError implements Parcelable {
         dest.writeString(this.message);
     }
 
-    protected DataSourceError(Parcel in) {
+    protected DataServiceError(Parcel in) {
         this.message = in.readString();
     }
 
-    public static final Parcelable.Creator<DataSourceError> CREATOR = new Parcelable.Creator<DataSourceError>() {
+    public static final Parcelable.Creator<DataServiceError> CREATOR = new Parcelable.Creator<DataServiceError>() {
         @Override
-        public DataSourceError createFromParcel(Parcel source) {
-            return new DataSourceError(source);
+        public DataServiceError createFromParcel(Parcel source) {
+            return new DataServiceError(source);
         }
 
         @Override
-        public DataSourceError[] newArray(int size) {
-            return new DataSourceError[size];
+        public DataServiceError[] newArray(int size) {
+            return new DataServiceError[size];
         }
     };
 }

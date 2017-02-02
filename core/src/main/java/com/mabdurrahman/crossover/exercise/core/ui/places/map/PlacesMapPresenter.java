@@ -17,7 +17,6 @@ package com.mabdurrahman.crossover.exercise.core.ui.places.map;
 
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
 import com.mabdurrahman.crossover.exercise.core.ui.base.BasePresenter;
-import com.mabdurrahman.crossover.exercise.core.ui.places.list.PlacesListContract;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.

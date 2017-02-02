@@ -43,7 +43,9 @@ allprojects {
 
         retrofitVersion = '2.1.0'
         okhttpVersion = '3.3.0'
-        
+
+        daggerVersion = '2.4'
+
         materialDialogsVersion = '0.8.5.7'
         materialishProgressVersion = '1.7'
         materialEditTextVersion = '2.1.4'

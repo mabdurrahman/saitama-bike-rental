@@ -18,9 +18,9 @@ package com.mabdurrahman.crossover.exercise.core.data.network;
 import android.support.annotation.NonNull;
 
 import com.mabdurrahman.crossover.exercise.core.CoreApplication;
-import com.mabdurrahman.crossover.exercise.core.data.DataSource;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceError;
+import com.mabdurrahman.crossover.exercise.core.data.DataService;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceError;
 import com.mabdurrahman.crossover.exercise.core.data.network.api.JitenshaApi;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.AuthenticationRequest;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.AuthenticationResponse;
@@ -34,10 +34,10 @@ import java.util.List;
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public class RemoteDataSource implements DataSource {
+public class RemoteDataService implements DataService {
 
     @Override
-    public void authenticateUser(String email, String password, final DataSourceCallback<String> authenticationCallback) {
+    public void authenticateUser(String email, String password, final DataServiceCallback<String> authenticationCallback) {
         RemoteCallback<AuthenticationResponse> authenticationRemoteCallback = new RemoteCallback<AuthenticationResponse>() {
             @Override
             public void onSuccess(AuthenticationResponse authenticationResponse) {
@@ -57,7 +57,7 @@ public class RemoteDataSource implements DataSource {
             public void onFailed(@NonNull RemoteError error) {
                 if (authenticationCallback == null) return;
 
-                authenticationCallback.onFailed(new DataSourceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
+                authenticationCallback.onFailed(new DataServiceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
             }
         };
 
@@ -68,7 +68,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void registerNewUser(String email, String password, final DataSourceCallback<String> authenticationCallback) {
+    public void registerNewUser(String email, String password, final DataServiceCallback<String> authenticationCallback) {
         RemoteCallback<AuthenticationResponse> authenticationRemoteCallback = new RemoteCallback<AuthenticationResponse>() {
             @Override
             public void onSuccess(AuthenticationResponse authenticationResponse) {
@@ -88,7 +88,7 @@ public class RemoteDataSource implements DataSource {
             public void onFailed(@NonNull RemoteError error) {
                 if (authenticationCallback == null) return;
 
-                authenticationCallback.onFailed(new DataSourceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
+                authenticationCallback.onFailed(new DataServiceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
             }
         };
 
@@ -99,7 +99,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void getPlaces(final DataSourceCallback<List<Place>> placesCallback) {
+    public void getPlaces(final DataServiceCallback<List<Place>> placesCallback) {
         RemoteCallback<PlacesResponse> placesRemoteCallback = new RemoteCallback<PlacesResponse>() {
             @Override
             public void onSuccess(PlacesResponse placesResponse) {
@@ -119,7 +119,7 @@ public class RemoteDataSource implements DataSource {
             public void onFailed(@NonNull RemoteError error) {
                 if (placesCallback == null) return;
 
-                placesCallback.onFailed(new DataSourceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
+                placesCallback.onFailed(new DataServiceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
             }
         };
 
@@ -130,7 +130,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, final DataSourceCallback<String> rentCallback) {
+    public void rentBike(String creditCardNo, String holderName, String expirationDate, String securityCode, final DataServiceCallback<String> rentCallback) {
         RemoteCallback<RentResponse> rentRemoteCallback = new RemoteCallback<RentResponse>() {
             @Override
             public void onSuccess(RentResponse rentResponse) {
@@ -150,7 +150,7 @@ public class RemoteDataSource implements DataSource {
             public void onFailed(@NonNull RemoteError error) {
                 if (rentCallback == null) return;
 
-                rentCallback.onFailed(new DataSourceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
+                rentCallback.onFailed(new DataServiceError(error.getLocalizedErrorMessage(CoreApplication.getInstance().getResources())));
             }
         };
 

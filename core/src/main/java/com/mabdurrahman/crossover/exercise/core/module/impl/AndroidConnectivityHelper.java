@@ -13,32 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.util;
+package com.mabdurrahman.crossover.exercise.core.module.impl;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.IntDef;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ConnectivityHelper;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
-public class ConnectivityUtils {
-
-    @IntDef({NETWORK_DISCONNECTED_TYPE, NETWORK_CONNECTED_WIFI_TYPE, NETWORK_CONNECTED_MOBILE_TYPE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectivityStatus {}
-
-    public final static int NETWORK_DISCONNECTED_TYPE = 1;
-    public final static int NETWORK_CONNECTED_WIFI_TYPE = 2;
-    public final static int NETWORK_CONNECTED_MOBILE_TYPE = 3;
+public class AndroidConnectivityHelper extends ConnectivityHelper {
 
     @ConnectivityStatus
-    public static int getConnectivityStatus(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public int getConnectivityStatus() {
+        ConnectivityManager cm = (ConnectivityManager) CoreApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (null != activeNetwork) {
             boolean isConnected = activeNetwork.isConnectedOrConnecting();

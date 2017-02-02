@@ -15,9 +15,10 @@
  */
 package com.mabdurrahman.crossover.exercise.core;
 
+import com.mabdurrahman.crossover.exercise.core.module.abst.ClientHelper;
+import com.mabdurrahman.crossover.exercise.core.mock.MockDependencyInjection;
 import com.mabdurrahman.crossover.exercise.core.ui.intro.IntroContract;
 import com.mabdurrahman.crossover.exercise.core.ui.intro.IntroPresenter;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,38 +26,36 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.when;
 
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ ClientUtils.class })
 public class IntroPresenterTest {
 
     @Mock
     private IntroContract.View view;
 
     private IntroPresenter presenter;
+    private ClientHelper clientHelper;
 
     @Before
     public void setUp() {
+        MockDependencyInjection.initMockInjector();
+
+        clientHelper = CoreApplication.getClientHelper();
+
         presenter = new IntroPresenter();
         presenter.attachView(view);
     }
 
     @Test
     public void alreadyHaveAuthToken() {
-        mockStatic(ClientUtils.class);
-        when(ClientUtils.isLoggedin()).thenReturn(true);
+        when(clientHelper.isLoggedin()).thenReturn(true);
 
         presenter.onCheckLoginRequested();
 
@@ -66,8 +65,7 @@ public class IntroPresenterTest {
 
     @Test
     public void needToLogin() {
-        PowerMockito.mockStatic(ClientUtils.class);
-        Mockito.when(ClientUtils.isLoggedin()).thenReturn(false);
+        when(clientHelper.isLoggedin()).thenReturn(false);
 
         presenter.onCheckLoginRequested();
 

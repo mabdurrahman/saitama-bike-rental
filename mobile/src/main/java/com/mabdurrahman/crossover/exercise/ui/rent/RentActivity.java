@@ -26,7 +26,6 @@ import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mabdurrahman.crossover.exercise.R;
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
 import com.mabdurrahman.crossover.exercise.core.ui.rent.RentContract;
 import com.mabdurrahman.crossover.exercise.core.ui.rent.RentPresenter;
@@ -86,7 +85,7 @@ public class RentActivity extends BaseActivity implements RentContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new RentPresenter(DataManager.getInstance());
+        presenter = new RentPresenter();
         presenter.attachView(this);
 
         setupViews();

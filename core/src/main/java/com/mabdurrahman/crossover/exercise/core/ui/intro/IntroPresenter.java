@@ -15,8 +15,8 @@
  */
 package com.mabdurrahman.crossover.exercise.core.ui.intro;
 
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
 import com.mabdurrahman.crossover.exercise.core.ui.base.BasePresenter;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
@@ -30,7 +30,7 @@ public class IntroPresenter extends BasePresenter<IntroContract.View> implements
     public void onCheckLoginRequested() {
         if (!isViewAttached()) return;
 
-        if (ClientUtils.isLoggedin()) {
+        if (CoreApplication.getClientHelper().isLoggedin()) {
             view.showPlacesList();
         } else {
             view.showLoginForm();

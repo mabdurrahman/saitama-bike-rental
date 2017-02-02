@@ -15,7 +15,7 @@
  */
 package com.mabdurrahman.crossover.exercise.core.data.network;
 
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
 import com.mabdurrahman.crossover.exercise.core.util.Constants;
 
 import java.io.IOException;
@@ -36,9 +36,9 @@ public class RemoteRequestInterceptor implements Interceptor {
     public Response intercept(Interceptor.Chain chain) throws IOException {
         Request request = chain.request();
 
-        if (ClientUtils.isLoggedin()) {
+        if (CoreApplication.getClientHelper().isLoggedin()) {
             request = request.newBuilder()
-                    .addHeader(Constants.HEADER_AUTHORIZATION, ClientUtils.getAuthToken())
+                    .addHeader(Constants.HEADER_AUTHORIZATION, CoreApplication.getClientHelper().getAuthToken())
                     .build();
         }
 

@@ -15,7 +15,7 @@
  */
 package com.mabdurrahman.crossover.exercise.core.util;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceError;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceError;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Location;
 import com.mabdurrahman.crossover.exercise.core.data.network.model.Place;
 
@@ -29,8 +29,8 @@ public class TestConstants {
 
     public static final String SUCCESS_GENERAL = "General success :)";
 
-    public static final DataSourceError ERROR_INVALID_CREDENTIALS = new DataSourceError("Invalid username or password!");
-    public static final DataSourceError ERROR_SERVER = new DataSourceError("Server error, please try again later!");
+    public static final DataServiceError ERROR_INVALID_CREDENTIALS = new DataServiceError("Invalid username or password!");
+    public static final DataServiceError ERROR_SERVER = new DataServiceError("Server error, please try again later!");
 
     public static final String INVALID_USERNAME = "invalid.username@host.com";
     public static final String VALID_USERNAME = "valid.username@host.com";

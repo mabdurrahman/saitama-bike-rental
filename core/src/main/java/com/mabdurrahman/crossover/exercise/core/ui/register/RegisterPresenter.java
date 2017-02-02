@@ -18,22 +18,17 @@ package com.mabdurrahman.crossover.exercise.core.ui.register;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.mabdurrahman.crossover.exercise.core.data.DataManager;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceCallback;
-import com.mabdurrahman.crossover.exercise.core.data.DataSourceError;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceCallback;
+import com.mabdurrahman.crossover.exercise.core.data.DataServiceError;
 import com.mabdurrahman.crossover.exercise.core.ui.base.BasePresenter;
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
 
 /**
  * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/18/17.
  */
 public class RegisterPresenter extends BasePresenter<RegisterContract.View> implements RegisterContract.ViewActions {
 
-    @NonNull
-    private DataManager dataManager;
-
-    public RegisterPresenter(@NonNull DataManager dataManager) {
-        this.dataManager = dataManager;
+    public RegisterPresenter() {
     }
 
     @Override
@@ -43,7 +38,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
         view.showMessageLayout(false);
         view.showProgress();
 
-        dataManager.registerNewUser(username, password, new DataSourceCallback<String>() {
+        CoreApplication.getDataService().registerNewUser(username, password, new DataServiceCallback<String>() {
             @Override
             public void onSuccess(String authToken) {
                 if (!isViewAttached()) return;
@@ -54,7 +49,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
                     view.showError("Please check your credentials and try again!");
                     return;
                 }
-                ClientUtils.setAuthToken(authToken);
+                CoreApplication.getClientHelper().setAuthToken(authToken);
                 view.showPlacesList();
             }
 
@@ -67,7 +62,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
             }
 
             @Override
-            public void onFailed(@NonNull DataSourceError error) {
+            public void onFailed(@NonNull DataServiceError error) {
                 if (!isViewAttached()) return;
 
                 view.hideProgress();

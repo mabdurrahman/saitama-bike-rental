@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mabdurrahman.crossover.exercise.core.data;
+package com.mabdurrahman.crossover.exercise.core;
+
+import com.mabdurrahman.crossover.exercise.core.module.abst.ClientHelper;
+import com.mabdurrahman.crossover.exercise.core.module.abst.ConnectivityHelper;
 
 import javax.inject.Singleton;
 
@@ -21,24 +24,28 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/16/17.
+ * Created by Mahmoud Abdurrahman (ma.abdurrahman@gmail.com) on 1/31/17.
  */
 @Module
-public class DataManager {
+public class CoreModule {
 
-    private DataService dataService;
+    private final ClientHelper clientHelper;
+    private final ConnectivityHelper connectivityHelper;
 
-    public DataManager() {
-    }
-
-    public DataManager(DataService dataService) {
-        this.dataService = dataService;
+    public CoreModule(ClientHelper clientHelper, ConnectivityHelper connectivityHelper) {
+        this.clientHelper = clientHelper;
+        this.connectivityHelper = connectivityHelper;
     }
 
     @Provides
     @Singleton
-    DataService provideDataService() {
-        return dataService;
+    ClientHelper provideClientHelper() {
+        return clientHelper;
     }
 
+    @Provides
+    @Singleton
+    ConnectivityHelper provideConnectivityHelper() {
+        return connectivityHelper;
+    }
 }

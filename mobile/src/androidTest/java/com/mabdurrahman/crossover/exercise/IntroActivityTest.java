@@ -20,7 +20,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.mabdurrahman.crossover.exercise.core.util.ClientUtils;
+import com.mabdurrahman.crossover.exercise.core.CoreApplication;
 import com.mabdurrahman.crossover.exercise.idling.ActivityDestroyedIdlingResource;
 import com.mabdurrahman.crossover.exercise.ui.intro.IntroActivity;
 
@@ -65,25 +65,25 @@ public class IntroActivityTest {
 
     @Test
     public void noLoginRedirectToLoginForm() {
-        String authToken = ClientUtils.getAuthToken();
-        ClientUtils.setAuthToken(null);
+        String authToken = CoreApplication.getClientHelper().getAuthToken();
+        CoreApplication.getClientHelper().setAuthToken(null);
 
         onView(withText(R.string.btn_login))
                 .check(matches(isDisplayed()));
 
-        ClientUtils.setAuthToken(authToken);
+        CoreApplication.getClientHelper().setAuthToken(authToken);
     }
 
     @Test
     public void withLoginRedirectToPlacesScreen() {
-        String authToken = ClientUtils.getAuthToken();
-        ClientUtils.setAuthToken("FAKE_AUTH_TOKEN");
+        String authToken = CoreApplication.getClientHelper().getAuthToken();
+        CoreApplication.getClientHelper().setAuthToken("FAKE_AUTH_TOKEN");
 
         onView(allOf(isAssignableFrom(TextView.class),
                 withParent(isAssignableFrom(Toolbar.class))))
                 .check(matches(withText(R.string.activity_places)));
 
-        ClientUtils.setAuthToken(authToken);
+        CoreApplication.getClientHelper().setAuthToken(authToken);
     }
 
 }
